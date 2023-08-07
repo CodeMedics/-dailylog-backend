@@ -28,10 +28,10 @@ public class DiaryDTO {
 
     private LocalDateTime writeDate;
 
-    private int like;
+    private int likeCount;
 
     @Builder
-    public DiaryDTO(Long diaryNo, String diaryTitle, String diaryContent, long memberNo, String memberNickname, String feelCategory, LocalDateTime writeDate, int like) {
+    public DiaryDTO(Long diaryNo, String diaryTitle, String diaryContent, long memberNo, String memberNickname, String feelCategory, LocalDateTime writeDate, int likeCount) {
         this.diaryNo = diaryNo;
         this.diaryTitle = diaryTitle;
         this.diaryContent = diaryContent;
@@ -39,6 +39,6 @@ public class DiaryDTO {
         this.memberNickname = memberNickname;
         FeelCategory = feelCategory;
         this.writeDate = writeDate;
-        this.like = like;
+        this.likeCount = likeCount;
     }
 }
