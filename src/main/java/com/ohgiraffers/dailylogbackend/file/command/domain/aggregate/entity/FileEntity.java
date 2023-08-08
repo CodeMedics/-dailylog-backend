@@ -1,5 +1,6 @@
 package com.ohgiraffers.dailylogbackend.file.command.domain.aggregate.entity;
 
+import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.entity.Member;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,20 +27,21 @@ public class FileEntity {
     @Column
     private String filePath;
 
-
-    @JoinColumn(name = "id")
-    private Long memberNo;
-
+    @ManyToOne
+    @JoinColumn(name = "member_no")
+    private Member member;
 
     @JoinColumn(name = "diary_no")
     private Long diaryNo;
 
     public FileEntity() {}
 
-    public FileEntity(Long fileNo, String originFileName, String fileName, String filePath) {
+    public FileEntity(Long fileNo, String originFileName, String fileName, String filePath, Member member, Long diaryNo) {
         this.fileNo = fileNo;
         this.originFileName = originFileName;
         this.fileName = fileName;
         this.filePath = filePath;
+        this.member = member;
+        this.diaryNo = diaryNo;
     }
 }
