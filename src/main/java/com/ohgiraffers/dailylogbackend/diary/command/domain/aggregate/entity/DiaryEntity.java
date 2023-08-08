@@ -1,16 +1,17 @@
 package com.ohgiraffers.dailylogbackend.diary.command.domain.aggregate.entity;
 
-import com.ohgiraffers.dailylogbackend.diary.command.domain.aggregate.vo.DeleteEnum;
-import lombok.Getter;
+import com.ohgiraffers.dailylogbackend.common.AuditingFields;
+import com.ohgiraffers.dailylogbackend.common.enumType.DeleteEnum;
+import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.entity.Member;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "diary")
-public class DiaryEntity {
+@Setter
+public class DiaryEntity extends AuditingFields {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,26 +23,17 @@ public class DiaryEntity {
     @Column(length = 500, nullable = false)
     private String diaryContent;
 
-//    @OneToMany
-//    @JoinColumn(name="member_no", nullable = false)
-    @Column(nullable = false)
-    private long memberNo;
-
-    @Column(length = 30, nullable = false)
-    private String memberNickname;
+    @ManyToOne
+    @JoinColumn(name="member_no", nullable = false)
+    private Member member;
 
     @Column(length = 20, nullable = false)
     private String FeelCategory;
-
-    @Column(nullable = false)
-    private LocalDateTime writeDate;
 
     @Column
     private int likeCount;
 
     @Column(nullable = false)
     private DeleteEnum ifDelete;
-
-
 
 }
