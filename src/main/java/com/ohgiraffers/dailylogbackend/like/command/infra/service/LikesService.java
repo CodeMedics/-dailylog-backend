@@ -30,14 +30,14 @@ public class LikesService {
 //    }
 //
 //    //좋아요 누르기
-//    public void clickLike(Long diaryId, Long userId) {
-//        DiaryEntity diary = diaryRepository.findById(diaryId)
-//                .orElseThrow(() -> new EntityNotFoundException("Diary not found with id: " + diaryId));
+//    public void clickLike(Long diaryNo, Long member_no) {
+//        DiaryEntity diary = diaryRepository.findById(diaryNo)
+//                .orElseThrow(() -> new EntityNotFoundException("Diary not found with id: " + diaryNo));
 //
-//        Member member = userRepository.findById(userId)
-//                .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + userId));
+//        Member member = userRepository.findById(member_no)
+//                .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + member_no));
 //
-//        Optional<LikesEntity> like = likesRepository.findByDiaryIdAndUserId(diaryId, userId);
+//        Optional<LikesEntity> like = likesRepository.findByDiaryNoAndMember_No(diaryNo, member_no);
 //        // 이미 좋아요를 눌렀으면 제거
 //        if (like.isPresent()) {
 //            likesRepository.delete(like.get());
@@ -45,7 +45,7 @@ public class LikesService {
 //        }
 //        // 아직 좋아요를 안 눌렀으면 추가
 //        else {
-//            createLike(user, diary);
+//            createLike(member, diary);
 //            diary.setLikeCount(diary.getLikeCount() + 1);
 //        }
 //        diaryRepository.save(diary);
