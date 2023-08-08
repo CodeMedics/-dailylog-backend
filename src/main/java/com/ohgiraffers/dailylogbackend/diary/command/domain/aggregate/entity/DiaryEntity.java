@@ -37,7 +37,7 @@ public class DiaryEntity {
     private LocalDateTime writeDate;
 
     @Column
-    private int like;
+    private int likeCount;
 
     @Column(nullable = false)
     private DeleteEnum ifDelete;
