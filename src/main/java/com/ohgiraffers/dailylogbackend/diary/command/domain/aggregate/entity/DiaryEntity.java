@@ -1,5 +1,6 @@
 package com.ohgiraffers.dailylogbackend.diary.command.domain.aggregate.entity;
 
+import com.ohgiraffers.dailylogbackend.diary.command.domain.aggregate.vo.DeleteEnum;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -37,5 +38,10 @@ public class DiaryEntity {
 
     @Column
     private int likeCount;
+
+    @Column(nullable = false)
+    private DeleteEnum ifDelete;
+
+
 
 }
