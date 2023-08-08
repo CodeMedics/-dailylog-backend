@@ -7,21 +7,22 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "Likes")
 @NoArgsConstructor
-public class Likes {
+public class LikesEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long likesNo;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id", nullable = false)
+    @JoinColumn(name = "member_no", nullable = false)
     private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "diary_id", nullable = false)
+    @JoinColumn(name = "diary_no", nullable = false)
     private DiaryEntity diary;
 
-    public Likes(Member member, DiaryEntity diary) {
+    public LikesEntity(Member member, DiaryEntity diary) {
         this.member = member;
         this.diary = diary;
     }
