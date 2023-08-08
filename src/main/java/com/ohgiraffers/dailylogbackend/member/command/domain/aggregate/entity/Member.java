@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Table(name = "member")
 @SequenceGenerator(
         name = "member_sequence_generator",
-        sequenceName = "sequence_member_id",
+        sequenceName = "sequence_member_no",
         initialValue = 1,
         allocationSize = 50
 )
