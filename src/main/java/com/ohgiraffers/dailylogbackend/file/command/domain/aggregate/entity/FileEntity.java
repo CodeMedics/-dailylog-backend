@@ -26,20 +26,20 @@ public class FileEntity {
     @Column
     private String filePath;
 
-
-    @JoinColumn(name = "id")
-    private Long memberNo;
-
+    @JoinColumn(name = "member_no")
+    private MemberNo memberNo;
 
     @JoinColumn(name = "diary_no")
     private Long diaryNo;
 
     public FileEntity() {}
 
-    public FileEntity(Long fileNo, String originFileName, String fileName, String filePath) {
+    public FileEntity(Long fileNo, String originFileName, String fileName, String filePath, Long memberNo, Long diaryNo) {
         this.fileNo = fileNo;
         this.originFileName = originFileName;
         this.fileName = fileName;
         this.filePath = filePath;
+        this.memberNo = memberNo;
+        this.diaryNo = diaryNo;
     }
 }
