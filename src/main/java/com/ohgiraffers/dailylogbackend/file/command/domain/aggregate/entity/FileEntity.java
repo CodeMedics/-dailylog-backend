@@ -5,10 +5,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.File;
 
 @Entity
 @Table(name = "file_no")
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class FileEntity {
 
@@ -26,12 +26,20 @@ public class FileEntity {
     @Column
     private String filePath;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "id")
-//    private Long MemberNo;
-//
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "diary_no")
-//    private Long diaryNo;
 
+    @JoinColumn(name = "id")
+    private Long memberNo;
+
+
+    @JoinColumn(name = "diary_no")
+    private Long diaryNo;
+
+    public FileEntity() {}
+
+    public FileEntity(Long fileNo, String originFileName, String fileName, String filePath) {
+        this.fileNo = fileNo;
+        this.originFileName = originFileName;
+        this.fileName = fileName;
+        this.filePath = filePath;
+    }
 }
