@@ -1,5 +1,6 @@
 package com.ohgiraffers.dailylogbackend.file.command.domain.aggregate.entity;
 
+import com.ohgiraffers.dailylogbackend.common.AuditingFields;
 import com.ohgiraffers.dailylogbackend.diary.command.domain.aggregate.entity.DiaryEntity;
 import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.entity.Member;
 import lombok.AccessLevel;
@@ -12,7 +13,7 @@ import java.io.File;
 @Entity
 @Table(name = "file_no")
 @Getter
-public class FileEntity {
+public class FileEntity extends AuditingFields {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
