@@ -2,10 +2,9 @@ package com.ohgiraffers.dailylogbackend.declaration.command.domain.aggregate.ent
 
 import com.ohgiraffers.dailylogbackend.common.AuditingFields;
 import com.ohgiraffers.dailylogbackend.diary.command.domain.aggregate.entity.DiaryEntity;
-import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.entity.Member;
+import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.entity.MemberEntity;
 import lombok.Getter;
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "report")
@@ -24,17 +23,17 @@ public class Report extends AuditingFields {
     private Comment comment;
 
     @JoinColumn(name = "no")
-    private Member reporter;
+    private MemberEntity reporter;
 
     @JoinColumn(name = "no")
-    private Member reportee;
+    private MemberEntity reportee;
 
     @Column(name = "report_type")
     private Integer reportType;
 
     public Report() {}
 
-    public Report(DiaryEntity diary, Comment comment, Member reporter, Member reportee, Integer reportType) {
+    public Report(DiaryEntity diary, Comment comment, MemberEntity reporter, MemberEntity reportee, Integer reportType) {
         this.diary = diary;
         this.comment = comment;
         this.reporter = reporter;
