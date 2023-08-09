@@ -1,40 +1,45 @@
-package com.ohgiraffers.dailylogbackend.declaration.command.domain.aggregate.entity;
+package com.ohgiraffers.dailylogbackend.report.command.domain.aggregate.entity;
 
+import com.ohgiraffers.dailylogbackend.comment.command.domain.aggregate.entity.Comment;
 import com.ohgiraffers.dailylogbackend.common.AuditingFields;
 import com.ohgiraffers.dailylogbackend.diary.command.domain.aggregate.entity.DiaryEntity;
 import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.entity.Member;
-import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.Entity;
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "report")
-@Getter
-public class Report extends AuditingFields {
+@Setter
+public class ReportEntity extends AuditingFields {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
     private Long reportNo;
 
+    @ManyToOne
     @JoinColumn(name = "diary_no")
     private DiaryEntity diary;
 
+    @ManyToOne
     @JoinColumn(name = "comment_no")
     private Comment comment;
 
-    @JoinColumn(name = "no")
+    @ManyToOne
+    @JoinColumn(name = "member_no")
     private Member reporter;
 
-    @JoinColumn(name = "no")
+    @ManyToOne
+    @JoinColumn(name = "member_no")
     private Member reportee;
 
     @Column(name = "report_type")
     private Integer reportType;
 
-    public Report() {}
+    public ReportEntity() {}
 
-    public Report(DiaryEntity diary, Comment comment, Member reporter, Member reportee, Integer reportType) {
+    public ReportEntity(DiaryEntity diary, Comment comment, Member reporter, Member reportee, Integer reportType) {
         this.diary = diary;
         this.comment = comment;
         this.reporter = reporter;
