@@ -1,14 +1,7 @@
 package com.ohgiraffers.dailylogbackend.like.command.infra.service;
 
 
-import com.ohgiraffers.dailylogbackend.diary.command.domain.aggregate.entity.DiaryEntity;
-import com.ohgiraffers.dailylogbackend.like.command.domain.aggregate.entity.LikesEntity;
-import com.ohgiraffers.dailylogbackend.like.command.infra.repository.LikesRepository;
-import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.entity.Member;
 import org.springframework.stereotype.Service;
-
-import javax.persistence.EntityNotFoundException;
-import java.util.Optional;
 
 @Service
 public class LikesService {

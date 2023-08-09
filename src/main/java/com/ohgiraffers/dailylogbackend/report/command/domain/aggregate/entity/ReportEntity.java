@@ -3,7 +3,7 @@ package com.ohgiraffers.dailylogbackend.report.command.domain.aggregate.entity;
 import com.ohgiraffers.dailylogbackend.comment.command.domain.aggregate.entity.Comment;
 import com.ohgiraffers.dailylogbackend.common.AuditingFields;
 import com.ohgiraffers.dailylogbackend.diary.command.domain.aggregate.entity.DiaryEntity;
-import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.entity.Member;
+import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.entity.MemberEntity;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -30,18 +30,21 @@ public class ReportEntity extends AuditingFields {
 
     @ManyToOne
     @JoinColumn(name = "member_no")
-    private Member reporter;
+
+    private MemberEntity reporter;
 
     @ManyToOne
     @JoinColumn(name = "member_no")
-    private Member reportee;
+    private MemberEntity reportee;
+
 
     @Column(name = "report_type")
     private Integer reportType;
 
     public ReportEntity() {}
 
-    public ReportEntity(DiaryEntity diary, Comment comment, Member reporter, Member reportee, Integer reportType) {
+
+    public ReportEntity(DiaryEntity diary, Comment comment, MemberEntity reporter, MemberEntity reportee, Integer reportType) {
         this.diary = diary;
         this.comment = comment;
         this.reporter = reporter;

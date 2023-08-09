@@ -26,6 +26,11 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     // mysql
     runtimeOnly 'mysql:mysql-connector-java'
+    // mysql
+    implementation 'mysql:mysql-connector-java:8.0.28'
+    //mybatis
+    implementation 'org.mybatis:mybatis:3.5.6'
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.3.1'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'

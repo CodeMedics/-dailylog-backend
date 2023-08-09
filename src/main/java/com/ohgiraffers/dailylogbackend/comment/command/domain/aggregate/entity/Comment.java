@@ -1,7 +1,7 @@
 package com.ohgiraffers.dailylogbackend.comment.command.domain.aggregate.entity;
 
 import com.ohgiraffers.dailylogbackend.diary.command.domain.aggregate.entity.DiaryEntity;
-import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.entity.Member;
+import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.entity.MemberEntity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -27,9 +27,9 @@ public class Comment {
     private DiaryEntity diaryNo;
 
     @JoinColumn(name = "member_no")
-    private Member memberNo;
+    private MemberEntity memberNo;
 
-    public Comment(Long commentNo, String commentContent, boolean commentIsDeleted, LocalDateTime commentDate, DiaryEntity diaryNo, Member memberNo) {
+    public Comment(Long commentNo, String commentContent, boolean commentIsDeleted, LocalDateTime commentDate, DiaryEntity diaryNo, MemberEntity memberNo) {
         this.commentNo = commentNo;
         this.commentContent = commentContent;
         this.commentIsDeleted = commentIsDeleted;

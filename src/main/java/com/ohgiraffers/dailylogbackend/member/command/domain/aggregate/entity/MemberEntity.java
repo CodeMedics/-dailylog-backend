@@ -1,14 +1,20 @@
 package com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.entity;
 
+import com.ohgiraffers.dailylogbackend.common.enumType.DeleteEnum;
 import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.EnumType.GenderEnum;
 import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.EnumType.SocialEnum;
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity(name = "Member")
+@Setter
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "member")
 @SequenceGenerator(
         name = "member_sequence_generator",
@@ -16,7 +22,7 @@ import java.time.LocalDate;
         initialValue = 1,
         allocationSize = 50
 )
-public class Member {
+public class MemberEntity {
 
     @Id
     @GeneratedValue(
@@ -61,7 +67,7 @@ public class Member {
     private LocalDate deletedDate;
 
     @Column(name = "is_deleted", columnDefinition = "varchar (2)", nullable = false)
-    private String isDeleted;
+    private DeleteEnum isDeleted;
 
     @Column(name = "reported_count", nullable = false)
     private int reportedCount;

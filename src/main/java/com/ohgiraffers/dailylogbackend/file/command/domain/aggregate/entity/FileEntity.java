@@ -1,6 +1,9 @@
 package com.ohgiraffers.dailylogbackend.file.command.domain.aggregate.entity;
 
-import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.entity.Member;
+import com.ohgiraffers.dailylogbackend.common.AuditingFields;
+import com.ohgiraffers.dailylogbackend.diary.command.domain.aggregate.entity.DiaryEntity;
+import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.entity.MemberEntity;
+import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.entity.MemberEntity;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +14,7 @@ import java.io.File;
 @Entity
 @Table(name = "file_no")
 @Getter
-public class FileEntity {
+public class FileEntity extends AuditingFields {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,14 +32,15 @@ public class FileEntity {
 
     @ManyToOne
     @JoinColumn(name = "member_no")
-    private Member member;
+    private MemberEntity member;
 
+    @ManyToOne
     @JoinColumn(name = "diary_no")
-    private Long diaryNo;
+    private DiaryEntity diaryNo;
 
     public FileEntity() {}
 
-    public FileEntity(Long fileNo, String originFileName, String fileName, String filePath, Member member, Long diaryNo) {
+    public FileEntity(Long fileNo, String originFileName, String fileName, String filePath, MemberEntity member, DiaryEntity diaryNo) {
         this.fileNo = fileNo;
         this.originFileName = originFileName;
         this.fileName = fileName;
