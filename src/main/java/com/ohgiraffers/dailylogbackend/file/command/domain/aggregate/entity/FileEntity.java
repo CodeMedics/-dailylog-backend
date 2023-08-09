@@ -2,7 +2,8 @@ package com.ohgiraffers.dailylogbackend.file.command.domain.aggregate.entity;
 
 import com.ohgiraffers.dailylogbackend.common.AuditingFields;
 import com.ohgiraffers.dailylogbackend.diary.command.domain.aggregate.entity.DiaryEntity;
-import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.entity.Member;
+import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.entity.MemberEntity;
+import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.entity.MemberEntity;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,7 +32,7 @@ public class FileEntity extends AuditingFields {
 
     @ManyToOne
     @JoinColumn(name = "member_no")
-    private Member member;
+    private MemberEntity member;
 
     @ManyToOne
     @JoinColumn(name = "diary_no")
@@ -39,7 +40,7 @@ public class FileEntity extends AuditingFields {
 
     public FileEntity() {}
 
-    public FileEntity(Long fileNo, String originFileName, String fileName, String filePath, Member member, DiaryEntity diaryNo) {
+    public FileEntity(Long fileNo, String originFileName, String fileName, String filePath, MemberEntity member, DiaryEntity diaryNo) {
         this.fileNo = fileNo;
         this.originFileName = originFileName;
         this.fileName = fileName;
