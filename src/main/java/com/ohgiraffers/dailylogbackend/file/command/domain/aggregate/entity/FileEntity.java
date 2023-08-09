@@ -1,6 +1,7 @@
 package com.ohgiraffers.dailylogbackend.file.command.domain.aggregate.entity;
 
 import com.ohgiraffers.dailylogbackend.common.AuditingFields;
+import com.ohgiraffers.dailylogbackend.common.enumType.DeleteEnum;
 import com.ohgiraffers.dailylogbackend.diary.command.domain.aggregate.entity.DiaryEntity;
 import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.entity.MemberEntity;
 import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.entity.MemberEntity;
@@ -38,14 +39,19 @@ public class FileEntity extends AuditingFields {
     @JoinColumn(name = "diary_no")
     private DiaryEntity diaryNo;
 
+    @Column
+    private DeleteEnum isDelete;
+
     public FileEntity() {}
 
-    public FileEntity(Long fileNo, String originFileName, String fileName, String filePath, MemberEntity member, DiaryEntity diaryNo) {
+    public FileEntity(Long fileNo, String originFileName, String fileName, String filePath, MemberEntity member,
+                      DiaryEntity diaryNo, DeleteEnum isDelete) {
         this.fileNo = fileNo;
         this.originFileName = originFileName;
         this.fileName = fileName;
         this.filePath = filePath;
         this.member = member;
         this.diaryNo = diaryNo;
+        this.isDelete = isDelete;
     }
 }
