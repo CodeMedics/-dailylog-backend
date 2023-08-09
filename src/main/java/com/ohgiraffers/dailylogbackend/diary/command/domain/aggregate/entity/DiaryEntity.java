@@ -2,11 +2,10 @@ package com.ohgiraffers.dailylogbackend.diary.command.domain.aggregate.entity;
 
 import com.ohgiraffers.dailylogbackend.common.AuditingFields;
 import com.ohgiraffers.dailylogbackend.common.enumType.DeleteEnum;
-import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.entity.Member;
+import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.entity.MemberEntity;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "diary")
@@ -25,7 +24,7 @@ public class DiaryEntity extends AuditingFields {
 
     @ManyToOne
     @JoinColumn(name="member_no", nullable = false)
-    private Member member;
+    private MemberEntity member;
 
     @Column(length = 20, nullable = false)
     private String FeelCategory;
