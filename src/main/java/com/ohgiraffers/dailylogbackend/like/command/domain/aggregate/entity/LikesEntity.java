@@ -1,7 +1,7 @@
 package com.ohgiraffers.dailylogbackend.like.command.domain.aggregate.entity;
 
 import com.ohgiraffers.dailylogbackend.diary.command.domain.aggregate.entity.DiaryEntity;
-import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.entity.Member;
+import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.entity.MemberEntity;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -16,13 +16,13 @@ public class LikesEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_no", nullable = false)
-    private Member member;
+    private MemberEntity member;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "diary_no", nullable = false)
     private DiaryEntity diary;
 
-    public LikesEntity(Member member, DiaryEntity diary) {
+    public LikesEntity(MemberEntity member, DiaryEntity diary) {
         this.member = member;
         this.diary = diary;
     }
