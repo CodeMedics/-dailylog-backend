@@ -4,6 +4,7 @@ import com.ohgiraffers.dailylogbackend.comment.command.domain.aggregate.entity.C
 import com.ohgiraffers.dailylogbackend.common.AuditingFields;
 import com.ohgiraffers.dailylogbackend.diary.command.domain.aggregate.entity.DiaryEntity;
 import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.entity.Member;
+import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Entity;
@@ -12,6 +13,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "report")
 @Setter
+@Getter
 public class ReportEntity extends AuditingFields {
 
     @Id
