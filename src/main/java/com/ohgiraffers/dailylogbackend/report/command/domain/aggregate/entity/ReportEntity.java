@@ -30,16 +30,19 @@ public class ReportEntity extends AuditingFields {
 
     @ManyToOne
     @JoinColumn(name = "member_no")
+
     private MemberEntity reporter;
 
     @ManyToOne
     @JoinColumn(name = "member_no")
     private MemberEntity reportee;
 
+
     @Column(name = "report_type")
     private Integer reportType;
 
     public ReportEntity() {}
+
 
     public ReportEntity(DiaryEntity diary, Comment comment, MemberEntity reporter, MemberEntity reportee, Integer reportType) {
         this.diary = diary;
