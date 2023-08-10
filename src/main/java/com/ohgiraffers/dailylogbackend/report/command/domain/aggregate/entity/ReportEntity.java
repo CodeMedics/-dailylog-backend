@@ -1,10 +1,11 @@
 package com.ohgiraffers.dailylogbackend.report.command.domain.aggregate.entity;
 
-import com.ohgiraffers.dailylogbackend.comment.command.domain.aggregate.entity.Comment;
+import com.ohgiraffers.dailylogbackend.comment.command.domain.aggregate.entity.CommentEntity;
 import com.ohgiraffers.dailylogbackend.common.AuditingFields;
 import com.ohgiraffers.dailylogbackend.diary.command.domain.aggregate.entity.DiaryEntity;
 import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.entity.MemberEntity;
-import lombok.Getter;
+import com.ohgiraffers.dailylogbackend.report.command.domain.aggregate.EnumType.ReportStateEnum;
+import com.ohgiraffers.dailylogbackend.report.command.domain.aggregate.EnumType.ReportTypeEnum;
 import lombok.Setter;
 
 import javax.persistence.Entity;
@@ -13,7 +14,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "report")
 @Setter
-@Getter
 public class ReportEntity extends AuditingFields {
 
     @Id
@@ -22,30 +22,34 @@ public class ReportEntity extends AuditingFields {
 
     @ManyToOne
     @JoinColumn(name = "diary_no")
-    private DiaryEntity diary;
+    private DiaryEntity diaryNo;
 
     @ManyToOne
     @JoinColumn(name = "comment_no")
-    private Comment comment;
+    private CommentEntity commentNo;
 
     @ManyToOne
     @JoinColumn(name = "member_no")
-    private MemberEntity reporter;
+    private MemberEntity reporterNo;
 
     @ManyToOne
     @JoinColumn(name = "member_no")
-    private MemberEntity reportee;
+    private MemberEntity reporteeNo;
 
     @Column(name = "report_type")
-    private Integer reportType;
+    private ReportTypeEnum reportType;
+
+    @Column(name = "report_state")
+    private ReportStateEnum reportState;
 
     public ReportEntity() {}
 
-    public ReportEntity(DiaryEntity diary, Comment comment, MemberEntity reporter, MemberEntity reportee, Integer reportType) {
-        this.diary = diary;
-        this.comment = comment;
-        this.reporter = reporter;
-        this.reportee = reportee;
+    public ReportEntity(DiaryEntity diaryNo, CommentEntity commentNo, MemberEntity reporterNo, MemberEntity reporteeNo, ReportTypeEnum reportType, ReportStateEnum reportState) {
+        this.diaryNo = diaryNo;
+        this.commentNo = commentNo;
+        this.reporterNo = reporterNo;
+        this.reporteeNo = reporteeNo;
         this.reportType = reportType;
+        this.reportState = reportState;
     }
 }
