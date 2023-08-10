@@ -24,17 +24,17 @@ public class ReportEntity extends AuditingFields {
     @JoinColumn(name = "diary_no")
     private DiaryEntity diary;
 
-    @ManyToOne
-    @JoinColumn(name = "comment_no")
-    private Comment comment;
+//    @ManyToOne
+//    @JoinColumn(name = "comment_no")
+//    private Comment comment;
 
     @ManyToOne
-    @JoinColumn(name = "member_no")
+    @JoinColumn(name = "reporter")
 
     private MemberEntity reporter;
 
     @ManyToOne
-    @JoinColumn(name = "member_no")
+    @JoinColumn(name = "reportee")
     private MemberEntity reportee;
 
 
@@ -44,9 +44,9 @@ public class ReportEntity extends AuditingFields {
     public ReportEntity() {}
 
 
-    public ReportEntity(DiaryEntity diary, Comment comment, MemberEntity reporter, MemberEntity reportee, Integer reportType) {
+    public ReportEntity(DiaryEntity diary, MemberEntity reporter, MemberEntity reportee, Integer reportType) {
         this.diary = diary;
-        this.comment = comment;
+//        this.comment = comment;
         this.reporter = reporter;
         this.reportee = reportee;
         this.reportType = reportType;

@@ -24,9 +24,9 @@ public class DiaryEntity extends AuditingFields {
     @Column(length = 500, nullable = false)
     private String diaryContent;
 
-//    @ManyToOne
-//    @JoinColumn(name="member_no", nullable = false)
-//    private MemberEntity member;
+    @ManyToOne
+    @JoinColumn(name="member_no", nullable = false)
+    private MemberEntity member;
 
     @Column(length = 20, nullable = false)
     private String FeelCategory;
@@ -34,7 +34,7 @@ public class DiaryEntity extends AuditingFields {
     @Column
     private int likeCount;
 
-    @Column(nullable = false)
+    @Column
     private DeleteEnum ifDelete;
 
 //    @OneToMany

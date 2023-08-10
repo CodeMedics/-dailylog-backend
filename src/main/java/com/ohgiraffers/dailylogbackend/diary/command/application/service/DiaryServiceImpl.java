@@ -17,7 +17,10 @@ public class DiaryServiceImpl implements DiaryService {
 
     @Override
     public DiaryEntity writeDiary(DiaryEntity diaryEntity) {
-        return diaryRepository.save(diaryEntity);
+        DiaryEntity newDe = diaryRepository.save(diaryEntity);
+//        System.out.println(newDe.getDiaryNo());
+
+        return newDe;
     }
 
     @Override

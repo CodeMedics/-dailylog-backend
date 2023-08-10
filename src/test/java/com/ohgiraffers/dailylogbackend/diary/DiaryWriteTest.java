@@ -1,9 +1,9 @@
 package com.ohgiraffers.dailylogbackend.diary;
 
 import com.ohgiraffers.dailylogbackend.common.enumType.DeleteEnum;
+import com.ohgiraffers.dailylogbackend.diary.command.application.service.DiaryServiceImpl;
 import com.ohgiraffers.dailylogbackend.diary.command.domain.aggregate.entity.DiaryEntity;
 import com.ohgiraffers.dailylogbackend.diary.command.infra.repository.DiaryRepository;
-import com.ohgiraffers.dailylogbackend.diary.command.infra.service.DiaryService;
 import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.entity.MemberEntity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,6 +14,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest
 public class DiaryWriteTest {
@@ -22,7 +24,7 @@ public class DiaryWriteTest {
     private DiaryRepository diaryRepository;
 
     @InjectMocks
-    private DiaryService diaryService;
+    private DiaryServiceImpl diaryServiceImpl;
 
     @BeforeEach
     public void setUp() {
@@ -39,8 +41,11 @@ public class DiaryWriteTest {
 //        diaryEntity.setMember(memberEntity);
         diaryEntity.setFeelCategory("hahs");
 
+        when(diaryRepository.save(any(DiaryEntity.class))).thenReturn(diaryEntity);
+
         // Act
-        DiaryEntity createdDiary = diaryService.writeDiary(diaryEntity);
+        DiaryEntity createdDiary = diaryServiceImpl.writeDiary(diaryEntity);
+
 
         // Assert
         assertNotNull(createdDiary);
