@@ -36,6 +36,7 @@ public class ReportEntity extends AuditingFields {
     @JoinColumn(name = "member_no")
     private MemberEntity reporteeNo;
 
+
     @Column(name = "report_type")
     private ReportTypeEnum reportType;
 
@@ -49,6 +50,7 @@ public class ReportEntity extends AuditingFields {
         this.commentNo = commentNo;
         this.reporterNo = reporterNo;
         this.reporteeNo = reporteeNo;
+
         this.reportType = reportType;
         this.reportState = reportState;
     }
