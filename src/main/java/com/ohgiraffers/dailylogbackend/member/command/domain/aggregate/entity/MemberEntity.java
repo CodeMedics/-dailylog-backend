@@ -32,6 +32,9 @@ public class MemberEntity {
     @Column(name = "member_no")
     private Long memberNo;
 
+    @Column(name = "uid", nullable = false)
+    private Long UID;
+
     @Column(name = "nickname", unique = true, nullable = false)
     private String nickname;
 
