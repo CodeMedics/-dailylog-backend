@@ -6,6 +6,7 @@ import com.ohgiraffers.dailylogbackend.diary.command.domain.aggregate.entity.Dia
 import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.entity.MemberEntity;
 import com.ohgiraffers.dailylogbackend.report.command.domain.aggregate.EnumType.ReportStateEnum;
 import com.ohgiraffers.dailylogbackend.report.command.domain.aggregate.EnumType.ReportTypeEnum;
+import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Entity;
@@ -14,6 +15,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "report")
 @Setter
+@Getter
 public class ReportEntity extends AuditingFields {
 
     @Id
@@ -50,7 +52,6 @@ public class ReportEntity extends AuditingFields {
         this.commentNo = commentNo;
         this.reporterNo = reporterNo;
         this.reporteeNo = reporteeNo;
-
         this.reportType = reportType;
         this.reportState = reportState;
     }
