@@ -31,11 +31,11 @@ public class ReportEntity extends AuditingFields {
     private CommentEntity commentNo;
 
     @ManyToOne
-    @JoinColumn(name = "member_no")
+    @JoinColumn(name = "reporter_no")
     private MemberEntity reporterNo;
 
     @ManyToOne
-    @JoinColumn(name = "member_no")
+    @JoinColumn(name = "reportee_no")
     private MemberEntity reporteeNo;
 
 

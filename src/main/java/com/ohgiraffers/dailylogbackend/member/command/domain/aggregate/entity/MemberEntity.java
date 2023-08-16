@@ -32,7 +32,7 @@ public class MemberEntity {
     @Column(name = "member_no")
     private Long memberNo;
 
-    @Column(name = "nickname", unique = true, nullable = false)
+    @Column(name = "member_nickname", unique = true, nullable = false)
     private String nickname;
 
     @Column(name = "profile_image", length = 100)

@@ -29,7 +29,7 @@ public class ReportServiceImpl implements ReportService {
     @Transactional
     public void saveReportDiary(ReportDTO reportDTO, String reporteeMemberId, DiaryEntity diaryEntity) {
 
-        Optional<MemberEntity> reporteeMember = memberRepository.findByMemberId(reporteeMemberId);
+        Optional<MemberEntity> reporteeMember = memberRepository.findByMemberNo(reporteeMemberId);
 
         ReportEntity reportEntity = new ReportEntity();
         reportEntity.setDiaryNo(diaryEntity);
