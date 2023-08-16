@@ -9,7 +9,7 @@ import java.util.List;
 public interface DiaryService {
     public DiaryEntity writeDiary(DiaryWriteDTO diaryWriteDTO);
 
-    public void deleteDiary(DiaryEntity diaryEntity);
+    public void deleteDiary(Long diaryNo);
 
     public void updateDiary(Long diaryNo, DiaryUpdateDTO diaryUpdateDTO);
 }

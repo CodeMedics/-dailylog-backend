@@ -16,6 +16,7 @@ import java.util.List;
 @Entity
 @Table(name = "diary")
 @NoArgsConstructor
+@Getter
 public class DiaryEntity extends AuditingFields {
 
     @Id

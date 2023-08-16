@@ -28,8 +28,10 @@ public class DiaryServiceImpl implements DiaryService {
     }
 
     @Override
-    public void deleteDiary(DiaryEntity diaryEntity) {
-        diaryRepository.save(diaryEntity);
+    public void deleteDiary(Long diaryNo) {
+        DiaryEntity diaryEntity = diaryRepository.getReferenceById(diaryNo);
+
+        diaryEntity.setIfDelete(DeleteEnum.DELETED);
     }
 
     @Override
