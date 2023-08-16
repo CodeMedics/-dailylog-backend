@@ -1,6 +1,8 @@
 package com.ohgiraffers.dailylogbackend.diary.command.application.service;
 
 import com.ohgiraffers.dailylogbackend.common.enumType.DeleteEnum;
+import com.ohgiraffers.dailylogbackend.diary.command.application.dto.DiaryUpdateDTO;
+import com.ohgiraffers.dailylogbackend.diary.command.application.dto.DiaryWriteDTO;
 import com.ohgiraffers.dailylogbackend.diary.command.domain.aggregate.entity.DiaryEntity;
 import com.ohgiraffers.dailylogbackend.diary.command.infra.repository.DiaryRepository;
 import com.ohgiraffers.dailylogbackend.diary.command.infra.service.DiaryService;
@@ -16,23 +18,26 @@ public class DiaryServiceImpl implements DiaryService {
     }
 
     @Override
-    public DiaryEntity writeDiary(DiaryEntity diaryEntity) {
-        DiaryEntity newDe = diaryRepository.save(diaryEntity);
-//        System.out.println(newDe.getDiaryNo());
+    public DiaryEntity writeDiary(DiaryWriteDTO diaryWriteDTO) {
+        DiaryEntity diaryEntity = DiaryEntity.builder()
+                .diaryContent(diaryWriteDTO.getDiaryContent())
+                .feelCategory(diaryWriteDTO.getFeelCategory())
+                .build();
 
-        return newDe;
+        return diaryRepository.save(diaryEntity);
     }
 
     @Override
     public void deleteDiary(DiaryEntity diaryEntity) {
-        diaryEntity.setIfDelete(DeleteEnum.DELETED);
-
         diaryRepository.save(diaryEntity);
     }
 
     @Override
-    public void updateDiary(DiaryEntity diaryEntity) {
-        diaryRepository.save(diaryEntity);
+    public void updateDiary(Long diaryNo, DiaryUpdateDTO diaryUpdateDTO) {
+        DiaryEntity diaryEntity = diaryRepository.getReferenceById(diaryNo);
+
+        diaryEntity.updateDiaryEntity(diaryUpdateDTO.getDiaryContent(), diaryUpdateDTO.getFeelCategory());
+
     }
 
 }

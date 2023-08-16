@@ -4,7 +4,9 @@ import com.ohgiraffers.dailylogbackend.comment.command.domain.aggregate.entity.C
 import com.ohgiraffers.dailylogbackend.common.AuditingFields;
 import com.ohgiraffers.dailylogbackend.common.enumType.DeleteEnum;
 import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.entity.MemberEntity;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -13,8 +15,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "diary")
-@Getter
-@Setter
+@NoArgsConstructor
 public class DiaryEntity extends AuditingFields {
 
     @Id
@@ -24,12 +25,12 @@ public class DiaryEntity extends AuditingFields {
     @Column(length = 500, nullable = false)
     private String diaryContent;
 
-    @ManyToOne
-    @JoinColumn(name="member_no", nullable = false)
-    private MemberEntity member;
+//    @ManyToOne
+//    @JoinColumn(name="member_no", nullable = false)
+//    private MemberEntity member;
 
     @Column(length = 20, nullable = false)
-    private String FeelCategory;
+    private String feelCategory;
 
     @Column
     private int likeCount;
@@ -45,5 +46,20 @@ public class DiaryEntity extends AuditingFields {
     public void prePersist() {
         ifDelete = DeleteEnum.PRESENT;
         likeCount = 0;
+    }
+
+    @Builder
+    public DiaryEntity (String diaryContent, String feelCategory) {
+        this.diaryContent = diaryContent;
+        this.feelCategory = feelCategory;
+    }
+
+    public void updateDiaryEntity(String diaryContent, String feelCategory) {
+        this.diaryContent = diaryContent;
+        this.feelCategory = feelCategory;
+    }
+
+    public void setIfDelete(DeleteEnum ifDelete) {
+        this.ifDelete = ifDelete;
     }
 }
