@@ -26,9 +26,9 @@ public class DiaryEntity extends AuditingFields {
     @Column(length = 500, nullable = false)
     private String diaryContent;
 
-//    @ManyToOne
-//    @JoinColumn(name="member_no", nullable = false)
-//    private MemberEntity member;
+    @ManyToOne
+    @JoinColumn(name="member_no", nullable = false)
+    private MemberEntity member;
 
     @Column(length = 20, nullable = false)
     private String feelCategory;
@@ -49,10 +49,13 @@ public class DiaryEntity extends AuditingFields {
         likeCount = 0;
     }
 
-    @Builder
     public DiaryEntity (String diaryContent, String feelCategory) {
         this.diaryContent = diaryContent;
         this.feelCategory = feelCategory;
+    }
+
+    public DiaryEntity(Long diaryNo) {
+        this.diaryNo = diaryNo;
     }
 
     public void updateDiaryEntity(String diaryContent, String feelCategory) {

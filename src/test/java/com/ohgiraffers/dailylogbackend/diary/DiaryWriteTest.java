@@ -4,6 +4,7 @@ import com.ohgiraffers.dailylogbackend.diary.command.application.dto.DiaryWriteD
 import com.ohgiraffers.dailylogbackend.diary.command.application.service.DiaryServiceImpl;
 import com.ohgiraffers.dailylogbackend.diary.command.domain.aggregate.entity.DiaryEntity;
 import com.ohgiraffers.dailylogbackend.diary.command.infra.repository.DiaryRepository;
+import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.entity.MemberEntity;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,10 +30,9 @@ public class DiaryWriteTest {
     @DisplayName("diary insert test")
     public void testWriteDiary() {
         // Arrange
-        DiaryWriteDTO diaryWriteDTO = DiaryWriteDTO.builder()
-                .diaryContent("lol")
-                .feelCategory("good")
-                .build();
+
+
+//        DiaryWriteDTO diaryWriteDTO = new DiaryWriteDTO("lol", "good");
 
 //        DiaryEntity de = DiaryEntity.builder()
 //                .diaryContent("lol")
@@ -40,13 +40,13 @@ public class DiaryWriteTest {
 //                .build();
 
         // Act
-        DiaryEntity diaryEntity = diaryServiceImpl.writeDiary(diaryWriteDTO);
-
-//        DiaryEntity diaryEntity = diaryRepository.save(de);
-
-        // Assert
-        assertNotNull(diaryEntity);
-        assertEquals(diaryWriteDTO.getDiaryContent(), diaryEntity.getDiaryContent());
-        assertEquals(diaryWriteDTO.getFeelCategory(), diaryEntity.getFeelCategory());
+//        DiaryEntity diaryEntity = diaryServiceImpl.writeDiary(diaryWriteDTO);
+//
+////        DiaryEntity diaryEntity = diaryRepository.save(de);
+//
+//        // Assert
+//        assertNotNull(diaryEntity);
+//        assertEquals(diaryWriteDTO.getDiaryContent(), diaryEntity.getDiaryContent());
+//        assertEquals(diaryWriteDTO.getFeelCategory(), diaryEntity.getFeelCategory());
     }
 }

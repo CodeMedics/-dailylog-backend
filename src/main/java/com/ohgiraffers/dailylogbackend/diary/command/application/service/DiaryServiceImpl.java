@@ -19,10 +19,10 @@ public class DiaryServiceImpl implements DiaryService {
 
     @Override
     public DiaryEntity writeDiary(DiaryWriteDTO diaryWriteDTO) {
-        DiaryEntity diaryEntity = DiaryEntity.builder()
-                .diaryContent(diaryWriteDTO.getDiaryContent())
-                .feelCategory(diaryWriteDTO.getFeelCategory())
-                .build();
+
+        DiaryEntity diaryEntity = new DiaryEntity(diaryWriteDTO.getDiaryContent(),
+                diaryWriteDTO.getFeelCategory()
+                );
 
         return diaryRepository.save(diaryEntity);
     }
