@@ -1,6 +1,6 @@
 package com.ohgiraffers.dailylogbackend.diary.command.domain.aggregate.entity;
 
-import com.ohgiraffers.dailylogbackend.comment.command.domain.aggregate.entity.Comment;
+import com.ohgiraffers.dailylogbackend.comment.command.domain.aggregate.entity.CommentEntity;
 import com.ohgiraffers.dailylogbackend.common.AuditingFields;
 import com.ohgiraffers.dailylogbackend.common.enumType.DeleteEnum;
 import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.entity.MemberEntity;
@@ -28,7 +28,7 @@ public class DiaryEntity extends AuditingFields {
 
     @ManyToOne
     @JoinColumn(name="member_no", nullable = false)
-    private MemberEntity member;
+    private MemberEntity memberEntity;
 
     @Column(length = 20, nullable = false)
     private String feelCategory;
@@ -39,9 +39,9 @@ public class DiaryEntity extends AuditingFields {
     @Column
     private DeleteEnum ifDelete;
 
-//    @OneToMany
-//    @JoinColumn(name="comment_no")
-//    private List<Comment> comments = new ArrayList<>();
+    @OneToMany
+    @JoinColumn(name="comment_no")
+    private List<CommentEntity> comments;
 
     @PrePersist
     public void prePersist() {
@@ -49,7 +49,8 @@ public class DiaryEntity extends AuditingFields {
         likeCount = 0;
     }
 
-    public DiaryEntity (String diaryContent, String feelCategory) {
+    public DiaryEntity (MemberEntity memberEntity, String diaryContent, String feelCategory) {
+        this.memberEntity = memberEntity;
         this.diaryContent = diaryContent;
         this.feelCategory = feelCategory;
     }

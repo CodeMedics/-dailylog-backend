@@ -31,22 +31,24 @@ public class DiaryWriteTest {
     public void testWriteDiary() {
         // Arrange
 
+        MemberEntity memberEntity = MemberEntity.builder()
+                .memberNo(1L)
+                .build();
 
-//        DiaryWriteDTO diaryWriteDTO = new DiaryWriteDTO("lol", "good");
+        DiaryWriteDTO diaryWriteDTO = new DiaryWriteDTO(memberEntity, "lol", "good");
 
-//        DiaryEntity de = DiaryEntity.builder()
-//                .diaryContent("lol")
-//                .feelCategory("good")
-//                .build();
+//        DiaryEntity de = new DiaryEntity(diaryWriteDTO.getMemberEntity(),
+//                diaryWriteDTO.getDiaryContent(),
+//                diaryWriteDTO.getFeelCategory());
 
         // Act
-//        DiaryEntity diaryEntity = diaryServiceImpl.writeDiary(diaryWriteDTO);
+        DiaryEntity diaryEntity = diaryServiceImpl.writeDiary(diaryWriteDTO);
 //
 ////        DiaryEntity diaryEntity = diaryRepository.save(de);
 //
 //        // Assert
-//        assertNotNull(diaryEntity);
-//        assertEquals(diaryWriteDTO.getDiaryContent(), diaryEntity.getDiaryContent());
-//        assertEquals(diaryWriteDTO.getFeelCategory(), diaryEntity.getFeelCategory());
+        assertNotNull(diaryEntity);
+        assertEquals(diaryWriteDTO.getDiaryContent(), diaryEntity.getDiaryContent());
+        assertEquals(diaryWriteDTO.getFeelCategory(), diaryEntity.getFeelCategory());
     }
 }

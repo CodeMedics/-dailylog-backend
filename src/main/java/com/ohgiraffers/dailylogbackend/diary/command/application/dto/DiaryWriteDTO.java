@@ -7,15 +7,15 @@ import lombok.Getter;
 @Getter
 public class DiaryWriteDTO {
 
+    private MemberEntity memberEntity;
+
     private String diaryContent;
 
     private String feelCategory;
 
-    private MemberEntity memberEntity;
-
-    public DiaryWriteDTO(String diaryContent, String feelCategory, MemberEntity memberEntity) {
+    public DiaryWriteDTO(MemberEntity memberEntity, String diaryContent, String feelCategory) {
+        this.memberEntity = memberEntity;
         this.diaryContent = diaryContent;
         this.feelCategory = feelCategory;
-        this.memberEntity = memberEntity;
     }
 }

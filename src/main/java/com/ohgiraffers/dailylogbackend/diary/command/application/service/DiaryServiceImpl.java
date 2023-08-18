@@ -6,6 +6,7 @@ import com.ohgiraffers.dailylogbackend.diary.command.application.dto.DiaryWriteD
 import com.ohgiraffers.dailylogbackend.diary.command.domain.aggregate.entity.DiaryEntity;
 import com.ohgiraffers.dailylogbackend.diary.command.infra.repository.DiaryRepository;
 import com.ohgiraffers.dailylogbackend.diary.command.infra.service.DiaryService;
+import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.entity.MemberEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,9 +21,9 @@ public class DiaryServiceImpl implements DiaryService {
     @Override
     public DiaryEntity writeDiary(DiaryWriteDTO diaryWriteDTO) {
 
-        DiaryEntity diaryEntity = new DiaryEntity(diaryWriteDTO.getDiaryContent(),
-                diaryWriteDTO.getFeelCategory()
-                );
+        DiaryEntity diaryEntity = new DiaryEntity(diaryWriteDTO.getMemberEntity(),
+                diaryWriteDTO.getDiaryContent(),
+                diaryWriteDTO.getFeelCategory());
 
         return diaryRepository.save(diaryEntity);
     }
