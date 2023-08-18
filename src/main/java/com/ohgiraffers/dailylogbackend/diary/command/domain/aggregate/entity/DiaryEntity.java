@@ -4,10 +4,7 @@ import com.ohgiraffers.dailylogbackend.comment.command.domain.aggregate.entity.C
 import com.ohgiraffers.dailylogbackend.common.AuditingFields;
 import com.ohgiraffers.dailylogbackend.common.enumType.DeleteEnum;
 import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.entity.MemberEntity;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -67,4 +64,5 @@ public class DiaryEntity extends AuditingFields {
     public void setIfDelete(DeleteEnum ifDelete) {
         this.ifDelete = ifDelete;
     }
+
 }

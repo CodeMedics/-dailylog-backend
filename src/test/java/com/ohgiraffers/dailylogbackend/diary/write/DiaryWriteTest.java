@@ -1,4 +1,4 @@
-package com.ohgiraffers.dailylogbackend.diary;
+package com.ohgiraffers.dailylogbackend.diary.write;
 
 import com.ohgiraffers.dailylogbackend.diary.command.application.dto.DiaryWriteDTO;
 import com.ohgiraffers.dailylogbackend.diary.command.application.service.DiaryServiceImpl;
@@ -43,10 +43,10 @@ public class DiaryWriteTest {
 
         // Act
         DiaryEntity diaryEntity = diaryServiceImpl.writeDiary(diaryWriteDTO);
-//
-////        DiaryEntity diaryEntity = diaryRepository.save(de);
-//
-//        // Assert
+
+//        DiaryEntity diaryEntity = diaryRepository.save(de);
+
+        // Assert
         assertNotNull(diaryEntity);
         assertEquals(diaryWriteDTO.getDiaryContent(), diaryEntity.getDiaryContent());
         assertEquals(diaryWriteDTO.getFeelCategory(), diaryEntity.getFeelCategory());

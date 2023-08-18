@@ -11,5 +11,5 @@ public interface DiaryService {
 
     public void deleteDiary(Long diaryNo);
 
-    public void updateDiary(Long diaryNo, DiaryUpdateDTO diaryUpdateDTO);
+    public DiaryEntity updateDiary(Long diaryNo, DiaryUpdateDTO diaryUpdateDTO);
 }

@@ -1,6 +1,6 @@
-package com.ohgiraffers.dailylogbackend.diary;
+package com.ohgiraffers.dailylogbackend.diary.update;
 
-import com.ohgiraffers.dailylogbackend.diary.command.application.dto.DiaryWriteDTO;
+import com.ohgiraffers.dailylogbackend.diary.command.application.dto.DiaryUpdateDTO;
 import com.ohgiraffers.dailylogbackend.diary.command.application.service.DiaryServiceImpl;
 import com.ohgiraffers.dailylogbackend.diary.command.domain.aggregate.entity.DiaryEntity;
 import com.ohgiraffers.dailylogbackend.diary.command.infra.repository.DiaryRepository;
@@ -11,12 +11,13 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-public class DiaryWriteMockTest {
+public class DiaryUpdateMockTest {
 
     @Mock
     private DiaryRepository diaryRepository;
@@ -30,30 +31,30 @@ public class DiaryWriteMockTest {
     }
 
     @Test
-    @DisplayName("diary insert mock test")
-    public void testDiaryWrite() {
+    @DisplayName("diary update mock test")
+    public void diaryUpdateMockTest() {
         // Arrange
         MemberEntity memberEntity = MemberEntity.builder()
                 .memberNo(1L)
                 .build();
 
-        DiaryWriteDTO diaryWriteDTO = new DiaryWriteDTO(memberEntity,
-                "lol",
-                "good");
+        DiaryUpdateDTO diaryUpdateDTO = new DiaryUpdateDTO("omg", "amazing");
 
-        DiaryEntity mockedDiaryEntity = new DiaryEntity(diaryWriteDTO.getMemberEntity(),
-                diaryWriteDTO.getDiaryContent(),
-                diaryWriteDTO.getFeelCategory());
+        DiaryEntity mockedDiaryEntity = new DiaryEntity(memberEntity,
+                diaryUpdateDTO.getDiaryContent(),
+                diaryUpdateDTO.getFeelCategory());
 
+        Long diaryNo = 7L;
+
+
+        when(diaryRepository.getReferenceById(diaryNo)).thenReturn(mockedDiaryEntity);
         when(diaryRepository.save(any(DiaryEntity.class))).thenReturn(mockedDiaryEntity);
 
         // Act
-        DiaryEntity createdDiary = diaryServiceImpl.writeDiary(diaryWriteDTO);
+        DiaryEntity createdDiary = diaryServiceImpl.updateDiary(diaryNo, diaryUpdateDTO);
 
         // Assert
-        assertNotNull(createdDiary);
-        assertEquals(memberEntity.getMemberNo(), createdDiary.getMemberEntity().getMemberNo());
-        assertEquals(diaryWriteDTO.getDiaryContent(), createdDiary.getDiaryContent());
-        assertEquals(diaryWriteDTO.getFeelCategory(), createdDiary.getFeelCategory());
+        assertEquals(diaryUpdateDTO.getDiaryContent(), createdDiary.getDiaryContent());
+        assertEquals(diaryUpdateDTO.getFeelCategory(), createdDiary.getFeelCategory());
     }
 }
