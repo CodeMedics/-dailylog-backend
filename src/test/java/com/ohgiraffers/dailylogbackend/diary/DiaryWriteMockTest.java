@@ -12,7 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -37,23 +37,23 @@ public class DiaryWriteMockTest {
                 .memberNo(1L)
                 .build();
 
-//        DiaryWriteDTO diaryWriteDTO = DiaryWriteDTO.builder()
-//                .diaryContent("good")
-//                .feelCategory("bad")
-//                .build();
+        DiaryWriteDTO diaryWriteDTO = new DiaryWriteDTO(memberEntity,
+                "lol",
+                "good");
 
-//        DiaryEntity mockedDiaryEntity = DiaryEntity.builder()
-//                .diaryContent(diaryWriteDTO.getDiaryContent())
-//                .feelCategory(diaryWriteDTO.getFeelCategory())
-//                .build();
+        DiaryEntity mockedDiaryEntity = new DiaryEntity(diaryWriteDTO.getMemberEntity(),
+                diaryWriteDTO.getDiaryContent(),
+                diaryWriteDTO.getFeelCategory());
 
-//        when(diaryRepository.save(any(DiaryEntity.class))).thenReturn(mockedDiaryEntity);
+        when(diaryRepository.save(any(DiaryEntity.class))).thenReturn(mockedDiaryEntity);
 
         // Act
-//        DiaryEntity createdDiary = diaryServiceImpl.writeDiary(diaryWriteDTO);
+        DiaryEntity createdDiary = diaryServiceImpl.writeDiary(diaryWriteDTO);
 
         // Assert
-//        assertEquals("good", createdDiary.getDiaryContent());
-//        assertEquals("bad", createdDiary.getFeelCategory());
+        assertNotNull(createdDiary);
+        assertEquals(memberEntity.getMemberNo(), createdDiary.getMemberEntity().getMemberNo());
+        assertEquals(diaryWriteDTO.getDiaryContent(), createdDiary.getDiaryContent());
+        assertEquals(diaryWriteDTO.getFeelCategory(), createdDiary.getFeelCategory());
     }
 }
