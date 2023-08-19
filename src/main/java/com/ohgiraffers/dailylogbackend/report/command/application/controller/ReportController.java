@@ -2,7 +2,7 @@ package com.ohgiraffers.dailylogbackend.report.command.application.controller;
 
 import com.ohgiraffers.dailylogbackend.diary.command.domain.aggregate.entity.DiaryEntity;
 import com.ohgiraffers.dailylogbackend.diary.command.infra.repository.DiaryRepository;
-import com.ohgiraffers.dailylogbackend.report.command.application.dto.ReportDTO;
+import com.ohgiraffers.dailylogbackend.report.command.application.dto.ReportSaveDTO;
 import com.ohgiraffers.dailylogbackend.report.command.application.service.ReportServiceImpl;
 import com.ohgiraffers.dailylogbackend.report.command.domain.repository.ReportRepository;
 import com.ohgiraffers.dailylogbackend.report.command.domain.service.ReportCheckNullService;
@@ -33,13 +33,13 @@ public class ReportController {
     // 일기 신고 등록
     @ResponseBody
     @PostMapping("/report/{diaryNo}")
-    public ResponseEntity saveReport(@PathVariable("diaryNo") Long diaryNo, @RequestBody ReportDTO reportDTO) {
+    public ResponseEntity saveReport(@PathVariable("diaryNo") Long diaryNo, @RequestBody ReportSaveDTO reportDTO) {
 
         Optional<DiaryEntity> diaryEntity = diaryRepository.findById(diaryNo);
 
         if (reportCheckNullService.checkNotNull(reportDTO)) {
-            String reporteeMemberId = reportDTO.getMemberNickname();   // 신고 된 사람의 닉네임..?
-            reportService.saveReportDiary(reportDTO, reporteeMemberId, diaryEntity.get());
+//            Long reporteeMemberId = reportDTO.getReporteeNo();   // 신고 된 사람의 닉네임..?
+            reportService.saveReportDiary(reportDTO);
             // 추후 유저 존재하지 않을 시, 일기 존재하지 않을 시 로직 추가 예정
         }
             return ResponseEntity.created(URI.create("/api/v1/report/" + diaryNo)).build();

@@ -1,8 +1,8 @@
 package com.ohgiraffers.dailylogbackend.report.command.domain.service;
 
-import com.ohgiraffers.dailylogbackend.report.command.application.dto.ReportDTO;
+import com.ohgiraffers.dailylogbackend.report.command.application.dto.ReportSaveDTO;
 
 public interface ReportCheckNullService {
 
-    boolean checkNotNull(ReportDTO diaryReportDTO);
+    boolean checkNotNull(ReportSaveDTO diaryReportDTO);
 }

@@ -1,11 +1,11 @@
 package com.ohgiraffers.dailylogbackend.report.command.domain.service;
 
-import com.ohgiraffers.dailylogbackend.diary.command.domain.aggregate.entity.DiaryEntity;
-import com.ohgiraffers.dailylogbackend.report.command.application.dto.ReportDTO;
+import com.ohgiraffers.dailylogbackend.report.command.application.dto.ReportSaveDTO;
+import com.ohgiraffers.dailylogbackend.report.command.domain.aggregate.entity.ReportEntity;
 
 public interface ReportService {
 
-    void saveReportDiary(ReportDTO reportDTO, String memberNickname, DiaryEntity diaryEntity);
+    ReportEntity saveReportDiary(ReportSaveDTO reportDTO);
 
     void acceptReport(Long reportNo);
 }
