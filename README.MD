@@ -27,19 +27,19 @@
 ---
 ### 2. 깃허브 이슈 및 프로젝트 관리
 
-![이슈 관리.png](images%2F%EC%9D%B4%EC%8A%88%20%EA%B4%80%EB%A6%AC.png)
+> 깃허브를 통해 확인
 
 ---
 
 ### 3. 테스트 코드 진행 상황
  - SpringBootTest : 테스트 하기 위한 스펙트럼을 정한 뒤 (Service to DB / Controller to DB / WebRequest to DB) 데이터 플로우가 문제없이 흐르는지와 전체적인 코드가 잘 돌아가는지를 보기 위한 Integration Test Annotation
 
-### 3-1. 현 프로젝트에서의 테스트 코드
+#### 3-1. 현 프로젝트에서의 테스트 코드
  - 각 유닛별로 짜기에는 너무 많은 시간이 걸려 개발 기간이 늘어날 것 같아 Spring Boot Test Annotation을 사용하여 구현 완료한 계층 까지 스펙트럼을 점차 늘리는 방식으로 테스트 코드를 작성 하는 것이 좋을 것 같다
  - 최종적으로는 HttpRequest를 통해 웹 환경에서 요청 했을 시에 코드가 전체적으로 잘 돌아가며 Response 값이 잘 전달되는지에 대한 테스트 코드 작성이 필요
  - Service 클래스에서 Exception 처리한 예외 처리 코드들도 잘 동작 하는지 확인할 필요가 있다(예시: 로그인이 안돼있다 / 게시판의 주인이 아니다 등등)
 
-### 3-2. 예시
+#### 3-2. 예시
 
 @SpringBootTest
 public class DiaryUpdateTest {
@@ -66,4 +66,29 @@ public class DiaryUpdateTest {
         assertEquals(diaryUpdateDTO.getFeelCategory(), updatedDiary.getFeelCategory());
     }
 }
+
+---
+
+### 4. 8월 29일 최종 발표 전 진행 예정사항
+
+---
+
+- 1주차 : 피그마&미로 설계, Entity 구상 및 작성
+- 2주차 : 기본적인 C, U, D 기능 구현 및 테스트 코드 작성
+- 3주차 : 리액트 컴포넌트 및 기본 틀 구성
+
+> commons(공통 컴포넌트 관리 폴더) :  피드, 내 일기장, 마이페이지, 피드백, 로그인, 로그아웃으로 연결되는,
+왼쪽 레이아웃 bar 로,
+모든페이지 동일하게 사이드바구성 및 가운데 위에 harulog 로고 구성(Header, Footer, CommonSideBar, LogoSideBar)
+
+modules : api feature 단위 관리 - 카카오 로그인 api,  각 페이지 별로 api 호출 url 설정 및 함수 호출
+
+pages  : 피드, 내 일기장, 마이페이지, 피드백, 관리자 페이지별로  컴포넌트 구성
+
+css :  피드, 내 일기장, 마이페이지, 피드백, 관리자 페이지 별로 css 파일 각각 구성
+
+** 전체적으로 로그인부터 모든 페이지 사이즈 동일하게 레이아웃 구성,
+
+** 내 일기장 페이지에서 왼쪽엔 달력 컴포넌트, 오른쪽엔 "일주일간 나의 기분"의 통계 컴포넌트 구성
+
 
