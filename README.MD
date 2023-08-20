@@ -1,4 +1,4 @@
-# CodeMedic-DailyLog
+# CodeMedic-HaruLog
 
 ## 08/21일 중간점검 발표 내용
 
@@ -27,7 +27,7 @@
 ---
 ### 2. 깃허브 이슈 및 프로젝트 관리
 
-
+![이슈 관리.png](images%2F%EC%9D%B4%EC%8A%88%20%EA%B4%80%EB%A6%AC.png)
 
 ---
 
@@ -40,6 +40,7 @@
  - Service 클래스에서 Exception 처리한 예외 처리 코드들도 잘 동작 하는지 확인할 필요가 있다(예시: 로그인이 안돼있다 / 게시판의 주인이 아니다 등등)
 
 ### 3-2. 예시
+
 @SpringBootTest
 public class DiaryUpdateTest {
 
