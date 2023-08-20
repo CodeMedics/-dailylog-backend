@@ -33,7 +33,7 @@ public class ReportEntity extends AuditingFields {
     private MemberEntity reporterNo;
 
     @ManyToOne
-    @JoinColumn(name = "member_no")
+    @JoinColumn
     private MemberEntity reporteeNo;
 
 
