@@ -1,59 +1,29 @@
 # CodeMedic-DailyLog
 
-## Git-Flow && Commit message && Issue 규칙
+## 08/21일 중간점검 발표 내용
 
-### 1. Git-Flow
+### 1. 현 진행 브랜치 전략
 
-* 브랜치 종류
-  > master : 프로젝트가 최종적으로 배포되는 중심 브랜치입니다.
-  >
-  > develop : 개발이 진행되는 브랜치입니다. develop 브랜치가 배포할 수준의 기능을 갖추면 release 브랜치로 머지됩니다.
-  >
-  > feature : 기능을 개발하는 브랜치입니다. develop 브랜치에서 파생되는 브랜치이며, develop 브랜치로 머지됩니다.
-  >
-  > release : 개발된 내용을 배포하기 위해 준비하는 브랜치입니다. 충분한 테스트를 통해 버그를 검사하고, 배포할 준비가 되었다고 판단하면 master로 머지해 배포합니다. 버그 수정 내용을 develop 브랜치에도 반영하고, 최종적으로 master 브랜치에 머지합니다.
-  >
-  > hotfix : 출시 버전(master)에서 버그를 수정하는 브랜치입니다. master 브랜치에서 생성되며, 수정이 완료되면 develop, master 브랜치에 수정 사항을 반영합니다.
+## 1. Git 브랜치 생성 기준  
+ - 한 브랜치는 하나의 이슈와 관련되어 있어야 합니다. (1:1 관계)
+ - 브랜치명은 feature/컨텍스트/기능 순서로 작성하며, 카멜케이스로 작성합니다.
+ 
+       ex (1). CRUD 기능 중, create 기능 구현 관련 브랜치 생성 예시 -> feature/diary/create 
+       ex (2). 카멜케이스 작성 예시 -> feature/diary/detailedFeature 
 
-* 브랜치 네이밍 규칙
-  > master와 develop은 일반적으로 본래 이름 그대로 사용합니다.
-  >
-  > feature : feature/{기능 요약} 혹은 feature/{issue-number}-{기능 요약}
-  >
-  > release : release-{버전} 혹은 release/{버전}
-  >
-  > hotfix : hotfix-{버전}
-  >
+## 1-2. Git 브랜치 생성 및 관리 플로우 
+(1) 하나의 기능 구현을 완료한 후 PR(Pull request)를 올립니다.
+(2) 새 브랜치를 만들어 다음 기능 구현을 진행합니다.
+(3) 머지(Merge)가  되면 이전 기능에 대한 브랜치는 삭제합니다.
 
-### 2. commit-message
 
-* commit-message 통일
-* Header
-  > Feat : 새로운 기능에 대한 커밋
-  > 
-  > Fix : 버그 수정에 대한 커밋
-  > 
-  > Build : 빌드 관련 파일 수정에 대한 커밋
-  > 
-  > Chore : 그 외 자잘한 수정에 대한 커밋(rlxk qusrud)
-  > 
-  > Ci : CI 관련 설정 수정에 대한 커밋
-  > 
-  > Docs : 문서 수정에 대한 커밋
-  > 
-  > Style : 코드 스타일 혹은 포맷 등에 관한 커밋
-  > 
-  > Refactor : 코드 리팩토링에 대한 커밋 test : 테스트 코드 수정에 대한 커밋
-  > 
-  > Test : 테스트 코드 수정에 대한 커밋
+<img width="926" alt="image" src="https://github.com/CodeMedics/Harulog-backend/assets/134987216/3cc1da62-1917-45f1-8944-a603242b89fa">
+<img width="927" alt="image" src="https://github.com/CodeMedics/Harulog-backend/assets/134987216/a0d3e545-7854-4b6e-ae08-2610b22240bf">
+<img width="930" alt="image" src="https://github.com/CodeMedics/Harulog-backend/assets/134987216/0458c4ea-e20f-48d0-b69c-a6cae5b990c7">
+<img width="929" alt="image" src="https://github.com/CodeMedics/Harulog-backend/assets/134987216/c42f5278-1fc3-4c60-9ef1-f972cea04bf8">
 
-  * 통일방안
-    ~~~
-    [Header] 제목
-    본문내용
-    #이슈번호
 
-    ex) [Feat] 게시판 삭제
-        crud 기능 중 d 구현 완료
-        #23
-    ~~~
+---
+## 2. 테스트 코드 관련 안내
+- Mock, DataJPATest 테스트는 진행하지 않습니다.
+- 테스트 코드는 한 클래스를 기준으로 **SpringBootTest**로 진행해주시기 바랍니다.
