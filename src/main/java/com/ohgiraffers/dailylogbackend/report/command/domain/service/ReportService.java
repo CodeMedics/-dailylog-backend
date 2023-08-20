@@ -5,7 +5,7 @@ import com.ohgiraffers.dailylogbackend.report.command.domain.aggregate.entity.Re
 
 public interface ReportService {
 
-    ReportEntity saveReportDiary(ReportSaveDTO reportDTO);
-
+    ReportEntity saveReportDiary(ReportSaveDTO reportSaveDTO);
     void acceptReport(Long reportNo);
+    void declineReport(Long reportNo);
 }

@@ -8,22 +8,18 @@ import com.ohgiraffers.dailylogbackend.report.command.domain.aggregate.vo.Report
 import com.ohgiraffers.dailylogbackend.report.command.domain.aggregate.vo.ReporterVO;
 import com.ohgiraffers.dailylogbackend.report.command.domain.repository.ReportRepository;
 import com.ohgiraffers.dailylogbackend.report.command.domain.service.ReportService;
+import com.ohgiraffers.dailylogbackend.report.command.infra.service.RequestMemberServiceImpl;
+import org.apache.ibatis.javassist.NotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
-
 
 @Service
 public class ReportServiceImpl implements ReportService {
 
-    private final MemberRepository memberRepository;
     private final ReportRepository reportRepository;
 
-//    private final RequstMemberService requstMemberService;
 
-    public ReportServiceImpl(MemberRepository memberRepository, ReportRepository reportRepository) {
-        this.memberRepository = memberRepository;
+    public ReportServiceImpl(ReportRepository reportRepository) {
         this.reportRepository = reportRepository;
     }
 
@@ -31,7 +27,7 @@ public class ReportServiceImpl implements ReportService {
     @Transactional
     public ReportEntity saveReportDiary(ReportSaveDTO reportSaveDTO) {
 
-//        boolean existed = requstMemberService.existMemberById();
+//        boolean existed = requestMemberServiceImpl.checkNotNull(reportSaveDTO);
 //        Optional<MemberEntity> reporteeMember = memberRepository.findByMemberNo(reportSaveDTO.getReporteeNo());
 
 //        if (!reporteeMember.isPresent()) {
@@ -52,22 +48,40 @@ public class ReportServiceImpl implements ReportService {
         return reportEntity;
     }
 
+    // 신고 처리 로직
     @Override
     @Transactional
     public void acceptReport(Long reportNo) {
-        Optional<ReportEntity> optionalReportEntity = reportRepository.findById(reportNo);
 
-        if (optionalReportEntity.isPresent()) {
-            ReportEntity reportEntity = optionalReportEntity.get();
-
-            if (reportEntity.getReportState() != ReportStateEnum.PENDING) {
-                throw new RuntimeException("신고 상태가 PENDING이 아닙니다. 신고를 처리할 수 없습니다.");
-            }
+        try {
+            ReportEntity reportEntity = reportRepository.findById(reportNo)
+                    .orElseThrow(() -> new NotFoundException("존재하지않는 신고입니다."));
 
             reportEntity.setReportState(ReportStateEnum.ACCEPT);
+
             reportRepository.save(reportEntity);
-        } else {
-            throw new RuntimeException("신고 번호를 찾을 수 없습니다.");
+
+        } catch (NotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    // 신고 거절 로직
+    @Override
+    @Transactional
+    public void declineReport(Long reportNo) {
+
+        try {
+            ReportEntity reportEntity = reportRepository.findById(reportNo)
+                    .orElseThrow(() -> new NotFoundException("존재하지않는 신고입니다."));
+
+            reportEntity.setReportState(ReportStateEnum.DECLINE);
+
+            reportRepository.save(reportEntity);
+
+        } catch (NotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 }
+

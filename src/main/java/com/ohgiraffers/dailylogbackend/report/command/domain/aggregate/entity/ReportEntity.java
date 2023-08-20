@@ -7,7 +7,6 @@ import com.ohgiraffers.dailylogbackend.report.command.domain.aggregate.vo.Report
 import com.ohgiraffers.dailylogbackend.report.command.domain.aggregate.vo.ReporterVO;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.Entity;
@@ -16,7 +15,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "report")
 @Getter
-@Setter
 @ToString
 public class ReportEntity extends AuditingFields {
 
@@ -30,20 +28,18 @@ public class ReportEntity extends AuditingFields {
     @JoinColumn(name = "comment_no")
     private Long commentNo;
 
-//    @ManyToOne
-//    @JoinColumn(name = "reporter_no")
     @Embedded
     private ReporterVO reporter;
 
-    //@ManyToOne
-    //@JoinColumn(name = "reportee_no")
     @Embedded
     private ReporteeVO reportee;
 
     @Column(name = "report_type")
+    @Enumerated(EnumType.STRING)
     private ReportTypeEnum reportType;
 
     @Column(name = "report_state")
+    @Enumerated(EnumType.STRING)
     private ReportStateEnum reportState;
 
 
@@ -55,6 +51,20 @@ public class ReportEntity extends AuditingFields {
         this.reporter = reporter;
         this.reportee = reportee;
         this.reportType = reportType;
+        this.reportState = reportState != null ? reportState : ReportStateEnum.PENDING;
+    }
+
+    public ReportEntity() {
+
+    }
+
+
+    @PrePersist
+    public void prePersist() {
+        reportState = ReportStateEnum.PENDING;
+    }
+
+    public void setReportState(ReportStateEnum reportState) {
         this.reportState = reportState;
     }
 }

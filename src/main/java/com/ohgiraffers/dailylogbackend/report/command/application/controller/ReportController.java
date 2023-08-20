@@ -5,7 +5,7 @@ import com.ohgiraffers.dailylogbackend.diary.command.infra.repository.DiaryRepos
 import com.ohgiraffers.dailylogbackend.report.command.application.dto.ReportSaveDTO;
 import com.ohgiraffers.dailylogbackend.report.command.application.service.ReportServiceImpl;
 import com.ohgiraffers.dailylogbackend.report.command.domain.repository.ReportRepository;
-import com.ohgiraffers.dailylogbackend.report.command.domain.service.ReportCheckNullService;
+import com.ohgiraffers.dailylogbackend.report.command.infra.service.RequestMemberServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,30 +17,28 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/v1")
 public class ReportController {
-    private final ReportServiceImpl reportService;
+    private final ReportServiceImpl reportServiceImpl;
     private final ReportRepository reportRepository;
-    private final ReportCheckNullService reportCheckNullService;
+    private final RequestMemberServiceImpl requestMemberServiceImpl;
     private final DiaryRepository diaryRepository;
 
     @Autowired
-    public ReportController(ReportServiceImpl reportService, ReportRepository reportRepository, ReportCheckNullService reportCheckNullService, DiaryRepository diaryRepository) {
-        this.reportService = reportService;
+    public ReportController(ReportServiceImpl reportServiceImpl, ReportRepository reportRepository, RequestMemberServiceImpl requestMemberServiceImpl, DiaryRepository diaryRepository) {
+        this.reportServiceImpl = reportServiceImpl;
         this.reportRepository = reportRepository;
-        this.reportCheckNullService = reportCheckNullService;
+        this.requestMemberServiceImpl = requestMemberServiceImpl;
         this.diaryRepository = diaryRepository;
     }
 
     // 일기 신고 등록
     @ResponseBody
     @PostMapping("/report/{diaryNo}")
-    public ResponseEntity saveReport(@PathVariable("diaryNo") Long diaryNo, @RequestBody ReportSaveDTO reportDTO) {
+    public ResponseEntity saveReport(@PathVariable("diaryNo") Long diaryNo, @RequestBody ReportSaveDTO reportSaveDTO) {
 
         Optional<DiaryEntity> diaryEntity = diaryRepository.findById(diaryNo);
 
-        if (reportCheckNullService.checkNotNull(reportDTO)) {
-//            Long reporteeMemberId = reportDTO.getReporteeNo();   // 신고 된 사람의 닉네임..?
-            reportService.saveReportDiary(reportDTO);
-            // 추후 유저 존재하지 않을 시, 일기 존재하지 않을 시 로직 추가 예정
+        if (requestMemberServiceImpl.checkNotNull(reportSaveDTO)) {
+            reportServiceImpl.saveReportDiary(reportSaveDTO);
         }
             return ResponseEntity.created(URI.create("/api/v1/report/" + diaryNo)).build();
     }
@@ -49,7 +47,7 @@ public class ReportController {
     @DeleteMapping("reportdiary/{reportNo}")
     public ResponseEntity acceptReport(@PathVariable Long reportNo) {
         try {
-            reportService.acceptReport(reportNo);
+            reportServiceImpl.acceptReport(reportNo);
             return ResponseEntity.ok("신고가 처리되었습니다.");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("신고 처리에 실패하였습니다.");

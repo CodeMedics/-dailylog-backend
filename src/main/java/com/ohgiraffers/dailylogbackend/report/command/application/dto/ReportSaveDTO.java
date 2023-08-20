@@ -1,6 +1,5 @@
 package com.ohgiraffers.dailylogbackend.report.command.application.dto;
 
-import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.entity.MemberEntity;
 import com.ohgiraffers.dailylogbackend.report.command.domain.aggregate.EnumType.ReportStateEnum;
 import com.ohgiraffers.dailylogbackend.report.command.domain.aggregate.EnumType.ReportTypeEnum;
 import lombok.*;
@@ -9,7 +8,7 @@ import lombok.*;
 @Setter
 @Getter
 @ToString
-@Builder(toBuilder = true)
+//@Builder(toBuilder = true)
 public class ReportSaveDTO {
 
     private Long reportNo;
@@ -18,7 +17,7 @@ public class ReportSaveDTO {
     private Long reporterNo;
     private Long reporteeNo;
     private ReportTypeEnum reportType;
-    private ReportStateEnum reportState; // 변경된 부분
+    private ReportStateEnum reportState;
 
     @Builder
     public ReportSaveDTO(Long reportNo, Long diaryNo, Long commentNo, Long reporterNo, Long reporteeNo, ReportTypeEnum reportType, ReportStateEnum reportState) { // 변경된 부분

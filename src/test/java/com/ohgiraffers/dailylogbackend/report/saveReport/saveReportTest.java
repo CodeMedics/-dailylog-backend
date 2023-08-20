@@ -1,4 +1,4 @@
-package com.ohgiraffers.dailylogbackend.report;
+package com.ohgiraffers.dailylogbackend.report.saveReport;
 
 import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.entity.MemberEntity;
 import com.ohgiraffers.dailylogbackend.member.command.domain.repository.MemberRepository;
@@ -24,7 +24,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
-public class ReportTests {
+public class saveReportTest {
 
     @Mock
     private ReportRepository reportRepository;
@@ -86,5 +86,4 @@ public class ReportTests {
         assertEquals(reportSaveDTO.getReportType(), saveReport.getReportType());  // 열거형 값을 문자열로 비교
         assertEquals(reportSaveDTO.getReportState(), saveReport.getReportState());  // 열거형 값을 문자열로 비교
     }
-
 }
