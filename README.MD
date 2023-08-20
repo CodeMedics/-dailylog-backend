@@ -24,14 +24,45 @@
 <img width="930" alt="image" src="https://github.com/CodeMedics/Harulog-backend/assets/134987216/0458c4ea-e20f-48d0-b69c-a6cae5b990c7">
 <img width="929" alt="image" src="https://github.com/CodeMedics/Harulog-backend/assets/134987216/c42f5278-1fc3-4c60-9ef1-f972cea04bf8">
 
-
----
-### 1-3. 테스트 코드 관련 안내
-- Mock, DataJPATest 테스트는 진행하지 않습니다.
-- 테스트 코드는 한 클래스를 기준으로 **SpringBootTest**로 진행해주시기 바랍니다.
-
 ---
 ### 2. 깃허브 이슈 및 프로젝트 관리
 
+
+
 ---
+
+### 3. 테스트 코드 진행 상황
+ - SpringBootTest : 테스트 하기 위한 스펙트럼을 정한 뒤 (Service to DB / Controller to DB / WebRequest to DB) 데이터 플로우가 문제없이 흐르는지와 전체적인 코드가 잘 돌아가는지를 보기 위한 Integration Test Annotation
+
+### 3-1. 현 프로젝트에서의 테스트 코드
+ - 각 유닛별로 짜기에는 너무 많은 시간이 걸려 개발 기간이 늘어날 것 같아 Spring Boot Test Annotation을 사용하여 구현 완료한 계층 까지 스펙트럼을 점차 늘리는 방식으로 테스트 코드를 작성 하는 것이 좋을 것 같다
+ - 최종적으로는 HttpRequest를 통해 웹 환경에서 요청 했을 시에 코드가 전체적으로 잘 돌아가며 Response 값이 잘 전달되는지에 대한 테스트 코드 작성이 필요
+ - Service 클래스에서 Exception 처리한 예외 처리 코드들도 잘 동작 하는지 확인할 필요가 있다(예시: 로그인이 안돼있다 / 게시판의 주인이 아니다 등등)
+
+### 3-2. 예시
+@SpringBootTest
+public class DiaryUpdateTest {
+
+    @Autowired
+    private DiaryServiceImpl diaryServiceImpl;
+
+    @Autowired
+    private DiaryRepository diaryRepository;
+
+    @Test
+    @DisplayName("diary update test")
+    public void diaryUpdateTest() {
+        // Arrange
+
+        DiaryUpdateDTO diaryUpdateDTO = new DiaryUpdateDTO("meme", "ojingoo");
+
+        // Act
+        DiaryEntity updatedDiary = diaryServiceImpl.updateDiary(8L, diaryUpdateDTO); // serviceImpl 안의 save 코드가 저장된 엔티티 값을 리턴함
+
+        // Assert
+        assertNotNull(updatedDiary); // 리턴된 엔티티가 null 값이 아닌지 확인
+        assertEquals(diaryUpdateDTO.getDiaryContent(), updatedDiary.getDiaryContent()); // 리턴된 엔티티 안의 값이 처음 지정한 값과 일치하는지 확인
+        assertEquals(diaryUpdateDTO.getFeelCategory(), updatedDiary.getFeelCategory());
+    }
+}
 
