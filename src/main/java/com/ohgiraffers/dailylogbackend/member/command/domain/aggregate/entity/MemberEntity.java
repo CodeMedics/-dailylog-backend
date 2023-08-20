@@ -10,6 +10,7 @@ import java.time.LocalDate;
 
 @Entity(name = "Member")
 @Getter
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "member")
 @SequenceGenerator(
