@@ -30,6 +30,7 @@
 * https://github.com/CodeMedics/Harulog-backend/projects?query=is%3Aopen
 * https://github.com/CodeMedics/Harulog-backend/issues
 * https://github.com/CodeMedics/Harulog-backend/discussions
+* https://github.com/CodeMedics/Harulog-backend/milestones
 ---
 
 ### 3. 테스트 코드 진행 상황
