@@ -27,8 +27,9 @@
 ---
 ### 2. 깃허브 이슈 및 프로젝트 관리
 
-> 깃허브를 통해 확인
-
+* https://github.com/CodeMedics/Harulog-backend/projects?query=is%3Aopen
+* https://github.com/CodeMedics/Harulog-backend/issues
+* https://github.com/CodeMedics/Harulog-backend/discussions
 ---
 
 ### 3. 테스트 코드 진행 상황
