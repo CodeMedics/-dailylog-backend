@@ -32,4 +32,11 @@ public abstract class AuditingFields {
 
     @LastModifiedBy
     protected String modifiedBy; // 수정자
+
+    public AuditingFields() {
+        this.createdAt = LocalDateTime.now();
+        this.createdBy = "1";
+        this.modifiedAt = LocalDateTime.now();
+        this.modifiedBy = "1";
+    }
 }

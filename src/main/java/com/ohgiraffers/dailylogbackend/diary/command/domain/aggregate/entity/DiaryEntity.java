@@ -3,6 +3,7 @@ package com.ohgiraffers.dailylogbackend.diary.command.domain.aggregate.entity;
 import com.ohgiraffers.dailylogbackend.common.AuditingFields;
 import com.ohgiraffers.dailylogbackend.common.enumType.DeleteEnum;
 import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.entity.MemberEntity;
+import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "diary")
 @Setter
+@Getter
 public class DiaryEntity extends AuditingFields {
 
     @Id

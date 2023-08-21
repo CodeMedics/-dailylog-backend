@@ -35,12 +35,12 @@ jobs:
           mysql database: ${{ secrets.DATABASE_NAME }}
           mysql user: ${{ secrets.MYSQL_USERNAME }}
           mysql password: ${{ secrets.MYSQL_PASSWORD }}
-        
+          
       - name: Add permission
         run: chmod +x gradlew
 
       - name: Test with Gradle
-        run: ./gradlew —info test
+        run: ./gradlew --info test
 
       - name: Build with Gradle
         uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
