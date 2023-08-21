@@ -1,15 +1,12 @@
 package com.ohgiraffers.dailylogbackend.diary.write;
 
 import com.ohgiraffers.dailylogbackend.diary.command.application.dto.DiaryWriteDTO;
-import com.ohgiraffers.dailylogbackend.diary.command.application.service.DiaryServiceImpl;
+import com.ohgiraffers.dailylogbackend.diary.command.application.service.DiaryService;
 import com.ohgiraffers.dailylogbackend.diary.command.domain.aggregate.entity.DiaryEntity;
-import com.ohgiraffers.dailylogbackend.diary.command.infra.repository.DiaryRepository;
 import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.entity.MemberEntity;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -21,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class DiaryWriteTest {
 
     @Autowired
-    private DiaryServiceImpl diaryServiceImpl;
+    private DiaryService diaryService;
 
 //    @Autowired
 //    private DiaryRepository diaryRepository;
@@ -42,7 +39,7 @@ public class DiaryWriteTest {
 //                diaryWriteDTO.getFeelCategory());
 
         // Act
-        DiaryEntity diaryEntity = diaryServiceImpl.writeDiary(diaryWriteDTO);
+        DiaryEntity diaryEntity = diaryService.writeDiary(diaryWriteDTO);
 
 //        DiaryEntity diaryEntity = diaryRepository.save(de);
 

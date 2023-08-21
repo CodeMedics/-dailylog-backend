@@ -1,7 +1,7 @@
 package com.ohgiraffers.dailylogbackend.diary.update;
 
 import com.ohgiraffers.dailylogbackend.diary.command.application.dto.DiaryUpdateDTO;
-import com.ohgiraffers.dailylogbackend.diary.command.application.service.DiaryServiceImpl;
+import com.ohgiraffers.dailylogbackend.diary.command.application.service.DiaryService;
 import com.ohgiraffers.dailylogbackend.diary.command.domain.aggregate.entity.DiaryEntity;
 import com.ohgiraffers.dailylogbackend.diary.command.infra.repository.DiaryRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class DiaryUpdateTest {
 
     @Autowired
-    private DiaryServiceImpl diaryServiceImpl;
+    private DiaryService diaryService;
 
     @Autowired
     private DiaryRepository diaryRepository;
@@ -29,7 +29,7 @@ public class DiaryUpdateTest {
         DiaryUpdateDTO diaryUpdateDTO = new DiaryUpdateDTO("meme", "ojingoo");
 
         // Act
-        DiaryEntity updatedDiary = diaryServiceImpl.updateDiary(8L, diaryUpdateDTO);
+        DiaryEntity updatedDiary = diaryService.updateDiary(1L, diaryUpdateDTO);
 
         // Assert
         assertNotNull(updatedDiary);
