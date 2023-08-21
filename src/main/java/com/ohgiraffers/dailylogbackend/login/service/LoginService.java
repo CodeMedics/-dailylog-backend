@@ -3,9 +3,11 @@ package com.ohgiraffers.dailylogbackend.login.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ohgiraffers.dailylogbackend.jwt.TokenProvider;
+import com.ohgiraffers.dailylogbackend.login.dto.AccessTokenDTO;
 import com.ohgiraffers.dailylogbackend.login.dto.KakaoProfileDTO;
 import com.ohgiraffers.dailylogbackend.login.dto.OauthTokenDTO;
 import com.ohgiraffers.dailylogbackend.login.repository.LoginRepository;
+import com.ohgiraffers.dailylogbackend.member.command.application.dto.MemberDTO;
 import com.ohgiraffers.dailylogbackend.member.command.application.service.CreateMemberService;
 import com.ohgiraffers.dailylogbackend.member.command.domain.service.MemberService;
 import org.modelmapper.ModelMapper;
@@ -77,5 +79,39 @@ public class LoginService {
 
     public KakaoProfileDTO findKakaoProfile(String accessToken) {
 
+        RestTemplate rt = new RestTemplate();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization", "Bearer" + accessToken);
+        headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+
+        HttpEntity<MultiValueMap<String, String>> kakaoProfileRequest =
+                new HttpEntity<>(headers);
+
+        ResponseEntity<String> kakaoProfileResponse = rt.exchange(
+                "http://kapi.kakao.com/v2/user/me",
+                HttpMethod.POST,
+                kakaoProfileRequest,
+                String.class
+        );
+
+        KakaoProfileDTO kakaoProfileDTO = new KakaoProfileDTO();
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        try {
+            kakaoProfileDTO = objectMapper.readValue(kakaoProfileResponse.getBody(), KakaoProfileDTO.class);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+        return kakaoProfileDTO;
     }
+
+    public AccessTokenDTO getJwtToken(OauthTokenDTO oauthToken) {
+
+        KakaoProfileDTO kakaoProfileDTO = findKakaoProfile(oauthToken.getAccess_token());
+
+        MemberDTO foundMember = new MemberDTO();
+    }
+
 }

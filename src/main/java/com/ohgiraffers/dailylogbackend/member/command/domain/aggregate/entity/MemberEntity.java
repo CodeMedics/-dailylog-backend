@@ -72,6 +72,13 @@ public class MemberEntity {
     @Column(name = "reported_count", nullable = false)
     private int reportedCount;
 
+    @PrePersist
+    public void prePersist() {
+        isDeleted = DeleteEnum.PRESENT;
+        reportedCount = 0;
+        signUpDate = LocalDate.now();
+    }
+
     @Builder
     public MemberEntity(Long memberNo, String UID, String nickname, String profileImage, GenderEnum gender, SocialEnum social, String email, String accessToken, long accessTokenExpireDate, String refreshToken, long refreshTokenExpireDate) {
         this.memberNo = memberNo;
@@ -88,7 +95,9 @@ public class MemberEntity {
     }
 
     public void setDeleteIf() {
+
         this.isDeleted = DeleteEnum.DELETED;
+        this.deletedDate = LocalDate.now();
     }
 
     public MemberEntity(String uid, String nickname, String profileImage, String accessToken, String refreshToken, SocialEnum social, DeleteEnum isDeleted) {
