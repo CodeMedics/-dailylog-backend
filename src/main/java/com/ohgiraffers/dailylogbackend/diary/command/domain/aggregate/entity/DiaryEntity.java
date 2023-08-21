@@ -4,7 +4,9 @@ import com.ohgiraffers.dailylogbackend.comment.command.domain.aggregate.entity.C
 import com.ohgiraffers.dailylogbackend.common.AuditingFields;
 import com.ohgiraffers.dailylogbackend.common.enumType.DeleteEnum;
 import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.entity.MemberEntity;
+
 import lombok.*;
+
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -12,7 +14,9 @@ import java.util.List;
 
 @Entity
 @Table(name = "diary")
+
 @NoArgsConstructor
+
 @Getter
 public class DiaryEntity extends AuditingFields {
 

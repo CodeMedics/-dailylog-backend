@@ -9,14 +9,12 @@ import lombok.*;
 @Setter
 @Getter
 @ToString
-public class reportDTO {
+public class ReportCommentDTO {
 
-    private Long reportNo;
-    private Long diaryNo;
-    private Long commentNo;
-    private Long reporterNo;
-    private Long reporteeNo;
+    private Long commentReportNo;
+    private String memberNickname;
     private ReportTypeEnum reportType;
     private ReportStateEnum reportState;
+
 
 }

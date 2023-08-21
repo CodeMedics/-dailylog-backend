@@ -71,6 +71,7 @@ public class MemberEntity {
     @Column(name = "reported_count", nullable = false)
     private int reportedCount;
 
+
     @PrePersist
     public void prePersist() {
         isDeleted = DeleteEnum.PRESENT;
@@ -99,5 +100,7 @@ public class MemberEntity {
     }
 
     public MemberEntity(String uid, String nickname, String profileImage, String accessToken, String refreshToken, SocialEnum social, DeleteEnum isDeleted) {
+
     }
 }
+
