@@ -1,18 +1,20 @@
 package com.ohgiraffers.dailylogbackend.login.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
 public class KakaoProfileDTO {
 
-    private long id;
+    private Long UID;
     private String connected_at;
     private KakaoAccount kakao_account;
 
     public KakaoProfileDTO() {}
-
-    public KakaoProfileDTO(long id, String connected_at, KakaoAccount kakao_account) {
-        this.id = id;
-        this.connected_at = connected_at;
-        this.kakao_account = kakao_account;
-    }
 
 
 }

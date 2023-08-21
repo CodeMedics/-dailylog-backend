@@ -6,6 +6,7 @@ import com.ohgiraffers.dailylogbackend.jwt.TokenProvider;
 import com.ohgiraffers.dailylogbackend.login.dto.AccessTokenDTO;
 import com.ohgiraffers.dailylogbackend.login.dto.KakaoProfileDTO;
 import com.ohgiraffers.dailylogbackend.login.dto.OauthTokenDTO;
+import com.ohgiraffers.dailylogbackend.login.dto.RenewTokenDTO;
 import com.ohgiraffers.dailylogbackend.login.repository.LoginRepository;
 import com.ohgiraffers.dailylogbackend.member.command.application.dto.MemberDTO;
 import com.ohgiraffers.dailylogbackend.member.command.application.service.CreateMemberService;
@@ -107,11 +108,16 @@ public class LoginService {
         return kakaoProfileDTO;
     }
 
-    public AccessTokenDTO getJwtToken(OauthTokenDTO oauthToken) {
+    public RenewTokenDTO renewKakaoToken(MemberDTO foundMember) {
+        RestTemplate rt = new RestTemplate();
 
-        KakaoProfileDTO kakaoProfileDTO = findKakaoProfile(oauthToken.getAccess_token());
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Context-type", "application/x-www-form-unlencoded;charset=utf-8");
 
-        MemberDTO foundMember = new MemberDTO();
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        params.add("grant_type", "refresh_token");
+        params.add("client_id", System.getenv("KakaoRestAPIkey"));
+        params.add("refresh_token");
     }
 
 }
