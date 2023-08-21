@@ -1,6 +1,7 @@
 package com.ohgiraffers.dailylogbackend.file;
 
 import com.ohgiraffers.dailylogbackend.file.command.domain.service.FileService;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,6 +24,7 @@ public class FileServiceTests {
     }
 
     @Test
+    @DisplayName("파일 저장 성공")
     public void saveFile() throws Exception {
         // given
         String filePath = fileService.save(getMockUploadFile());
@@ -36,6 +38,7 @@ public class FileServiceTests {
     }
 
     @Test
+    @DisplayName("파일 삭제 성공")
     public void deleteFile() throws Exception {
         // given
         String filePath = fileService.save(getMockUploadFile());
