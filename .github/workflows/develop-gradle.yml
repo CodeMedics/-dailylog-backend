@@ -1,3 +1,4 @@
+
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
 # separate terms of service, privacy policy, and support
@@ -16,17 +17,6 @@ on:
 permissions: write-all
 
 jobs:
-  mysql:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Set up MySQL
-        run: |
-          sudo apt-get -y update
-          sudo apt-get -y install mysql-server
-          sudo service mysql start
-          sudo mysql -e "CREATE USER 'harulog'@'localhost' IDENTIFIED BY 'harulog';"
-          sudo mysql -e "CREATE DATABASE harulog;"
   build:
 
     runs-on: ubuntu-latest
@@ -38,12 +28,20 @@ jobs:
         with:
           java-version: '11'
           distribution: 'temurin'
-        
+
+      - name: Setup MySQL
+        uses: samin/mysql-action@v1
+        with:
+          character set server: 'utf8'
+          mysql database: ${{ secrets.DATABASE_NAME }}
+          mysql user: ${{ secrets.MYSQL_USERNAME }}
+          mysql password: ${{ secrets.MYSQL_PASSWORD }}
+          
       - name: Add permission
         run: chmod +x gradlew
 
       - name: Test with Gradle
-        run: ./gradlew —info test
+        run: ./gradlew --info test
 
       - name: Build with Gradle
         uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
