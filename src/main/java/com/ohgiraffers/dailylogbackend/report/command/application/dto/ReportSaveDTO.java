@@ -8,7 +8,6 @@ import lombok.*;
 @Setter
 @Getter
 @ToString
-//@Builder(toBuilder = true)
 public class ReportSaveDTO {
 
     private Long reportNo;

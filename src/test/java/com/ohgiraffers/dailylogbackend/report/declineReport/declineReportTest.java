@@ -1,4 +1,4 @@
-package com.ohgiraffers.dailylogbackend.report.declineReportTest;
+package com.ohgiraffers.dailylogbackend.report.declineReport;
 
 import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.entity.MemberEntity;
 import com.ohgiraffers.dailylogbackend.report.command.application.service.ReportServiceImpl;
