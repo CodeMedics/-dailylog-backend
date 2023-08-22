@@ -117,7 +117,28 @@ public class LoginService {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("grant_type", "refresh_token");
         params.add("client_id", System.getenv("KakaoRestAPIkey"));
-        params.add("refresh_token");
+        params.add("refresh_token", foundMember.getRefreshToken());
+
+        HttpEntity<MultiValueMap<String, String>> kakaoTokenRequest =
+                new HttpEntity<>(params, headers);
+
+        ResponseEntity<String> renewTokenResponse = rt.exchange(
+                "http://kauth.kakao.com/oauth/token",
+                HttpMethod.POST,
+                kakaoTokenRequest,
+                String.class
+        );
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        RenewTokenDTO renewToken = null;
+
+        try {
+            renewToken = objectMapper.readValue(renewTokenResponse.getBody(), RenewTokenDTO.class);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+        return renewToken;
     }
 
 }

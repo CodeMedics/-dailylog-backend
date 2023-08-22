@@ -1,5 +1,6 @@
 package com.ohgiraffers.dailylogbackend.member.command.domain.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ohgiraffers.dailylogbackend.member.command.application.dto.MemberDTO;
 import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.EnumType.SocialEnum;
@@ -8,6 +9,8 @@ import com.ohgiraffers.dailylogbackend.member.command.domain.repository.MemberRe
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Map;
 
 @Service
 public class MemberService {
@@ -31,5 +34,18 @@ public class MemberService {
         } else {
             return modelMapper.map(foundMember, MemberDTO.class);
         }
+    }
+
+    public MemberDTO getAuthedMember(String header) throws JsonProcessingException {
+
+        Map<String, String> headerMap = objectMapper.readValue(header, Map.class);
+
+        String id = String.valueOf(headerMap.get("memberNo"));
+
+        Long memberNo = Long.parseLong(id);
+
+        MemberEntity authedMember = (MemberEntity) memberRepository.findByUID(memberNo);
+
+        return modelMapper.map(authedMember, MemberDTO.class);
     }
 }
