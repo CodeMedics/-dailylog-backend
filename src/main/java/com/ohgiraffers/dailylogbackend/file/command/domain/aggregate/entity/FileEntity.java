@@ -13,7 +13,7 @@ import javax.persistence.*;
 import java.io.File;
 
 @Entity
-@Table(name = "file_tab")
+@Table(name = "file_no")
 @Getter
 public class FileEntity extends AuditingFields {
 
