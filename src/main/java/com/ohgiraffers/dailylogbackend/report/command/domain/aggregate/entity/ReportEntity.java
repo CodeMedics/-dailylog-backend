@@ -28,6 +28,7 @@ public class ReportEntity extends AuditingFields {
     @JoinColumn(name = "comment_no")
     private Long commentNo;
 
+
     @Embedded
     private ReporterVO reporter;
 
