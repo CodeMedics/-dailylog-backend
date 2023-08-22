@@ -16,7 +16,7 @@ public class DiaryDTO {
 
     private Long diaryNo;
 
-    private String diaryTitle;
+//    private String diaryTitle;
 
     private String diaryContent;
 
@@ -31,9 +31,9 @@ public class DiaryDTO {
     private int likeCount;
 
     @Builder
-    public DiaryDTO(Long diaryNo, String diaryTitle, String diaryContent, long memberNo, String memberNickname, String feelCategory, LocalDateTime writeDate, int likeCount) {
+
+    public DiaryDTO(Long diaryNo, String diaryContent, long memberNo, String memberNickname, String feelCategory, LocalDateTime writeDate, int likeCount) {
         this.diaryNo = diaryNo;
-        this.diaryTitle = diaryTitle;
         this.diaryContent = diaryContent;
         this.memberNo = memberNo;
         this.memberNickname = memberNickname;

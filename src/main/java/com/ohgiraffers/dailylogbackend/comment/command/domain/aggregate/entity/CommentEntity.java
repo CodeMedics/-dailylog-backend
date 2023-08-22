@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 @Entity
 @ToString
 @Setter
+@Getter
 @NoArgsConstructor
 public class CommentEntity extends AuditingFields {
 

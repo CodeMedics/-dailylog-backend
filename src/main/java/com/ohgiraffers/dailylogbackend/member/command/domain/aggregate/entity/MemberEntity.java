@@ -3,16 +3,12 @@ package com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.entity;
 import com.ohgiraffers.dailylogbackend.common.enumType.DeleteEnum;
 import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.EnumType.GenderEnum;
 import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.EnumType.SocialEnum;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity(name = "Member")
-@Setter
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "member")
@@ -32,7 +28,10 @@ public class MemberEntity {
     @Column(name = "member_no")
     private Long memberNo;
 
-    @Column(name = "nickname", unique = true, nullable = false)
+    @Column(name = "uid", nullable = false)
+    private String UID;
+
+    @Column(name = "member_nickname", unique = true, nullable = false)
     private String nickname;
 
     @Column(name = "profile_image", length = 100)
@@ -72,4 +71,36 @@ public class MemberEntity {
     @Column(name = "reported_count", nullable = false)
     private int reportedCount;
 
+
+    @PrePersist
+    public void prePersist() {
+        isDeleted = DeleteEnum.PRESENT;
+        reportedCount = 0;
+        signUpDate = LocalDate.now();
+    }
+
+    @Builder
+    public MemberEntity(Long memberNo, String UID, String nickname, String profileImage, GenderEnum gender, SocialEnum social, String email, String accessToken, long accessTokenExpireDate, String refreshToken, long refreshTokenExpireDate) {
+        this.memberNo = memberNo;
+        this.UID = UID;
+        this.nickname = nickname;
+        this.profileImage = profileImage;
+        this.gender = gender;
+        this.social = social;
+        this.email = email;
+        this.accessToken = accessToken;
+        this.accessTokenExpireDate = accessTokenExpireDate;
+        this.refreshToken = refreshToken;
+        this.refreshTokenExpireDate = refreshTokenExpireDate;
+    }
+
+    public void setDeleteIf() {
+        this.isDeleted = DeleteEnum.DELETED;
+        this.deletedDate = LocalDate.now();
+    }
+
+    public MemberEntity(String uid, String nickname, String profileImage, String accessToken, String refreshToken, SocialEnum social, DeleteEnum isDeleted) {
+
+    }
 }
+

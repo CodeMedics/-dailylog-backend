@@ -1,57 +1,74 @@
 package com.ohgiraffers.dailylogbackend.report.command.domain.aggregate.entity;
 
-import com.ohgiraffers.dailylogbackend.comment.command.domain.aggregate.entity.CommentEntity;
 import com.ohgiraffers.dailylogbackend.common.AuditingFields;
-import com.ohgiraffers.dailylogbackend.diary.command.domain.aggregate.entity.DiaryEntity;
-import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.entity.MemberEntity;
 import com.ohgiraffers.dailylogbackend.report.command.domain.aggregate.EnumType.ReportStateEnum;
 import com.ohgiraffers.dailylogbackend.report.command.domain.aggregate.EnumType.ReportTypeEnum;
-import lombok.Setter;
+import com.ohgiraffers.dailylogbackend.report.command.domain.aggregate.vo.ReporteeVO;
+import com.ohgiraffers.dailylogbackend.report.command.domain.aggregate.vo.ReporterVO;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.*;
 
 @Entity
 @Table(name = "report")
-@Setter
+@Getter
+@ToString
 public class ReportEntity extends AuditingFields {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reportNo;
 
-    @ManyToOne
     @JoinColumn(name = "diary_no")
-    private DiaryEntity diaryNo;
+    private Long diaryNo;
 
-    @ManyToOne
     @JoinColumn(name = "comment_no")
-    private CommentEntity commentNo;
+    private Long commentNo;
 
-    @ManyToOne
-    @JoinColumn(name = "member_no")
-    private MemberEntity reporterNo;
 
-    @ManyToOne
-    @JoinColumn
-    private MemberEntity reporteeNo;
+    @Embedded
+    private ReporterVO reporter;
 
+    @Embedded
+    private ReporteeVO reportee;
 
     @Column(name = "report_type")
+    @Enumerated(EnumType.STRING)
     private ReportTypeEnum reportType;
 
     @Column(name = "report_state")
+    @Enumerated(EnumType.STRING)
     private ReportStateEnum reportState;
 
-    public ReportEntity() {}
 
-    public ReportEntity(DiaryEntity diaryNo, CommentEntity commentNo, MemberEntity reporterNo, MemberEntity reporteeNo, ReportTypeEnum reportType, ReportStateEnum reportState) {
+    @Builder
+    public ReportEntity(Long reportNo, Long diaryNo, Long commentNo, ReporterVO reporter, ReporteeVO reportee, ReportTypeEnum reportType, ReportStateEnum reportState) {
+        this.reportNo = reportNo;
         this.diaryNo = diaryNo;
         this.commentNo = commentNo;
-        this.reporterNo = reporterNo;
-        this.reporteeNo = reporteeNo;
-
+        this.reporter = reporter;
+        this.reportee = reportee;
         this.reportType = reportType;
+        this.reportState = reportState != null ? reportState : ReportStateEnum.PENDING;
+    }
+
+    public ReportEntity() {
+
+    }
+
+
+    @PrePersist
+    public void prePersist() {
+        reportState = ReportStateEnum.PENDING;
+    }
+
+    public void setReportState(ReportStateEnum reportState) {
         this.reportState = reportState;
     }
 }
+
+
+
