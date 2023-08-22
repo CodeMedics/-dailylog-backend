@@ -20,7 +20,7 @@ public class FileServiceTests {
     private FileService fileService;
 
     private MockMultipartFile getMockUploadFile() throws IOException {
-        return new MockMultipartFile("file", "file.jpg", "image/jpg", new FileInputStream("C:/Users/user/Desktop/files/kim.jpg"));
+        return new MockMultipartFile("file", "file.jpg", "image/jpg", new FileInputStream("./testImg/kim.jpg"));
     }
 
     @Test
