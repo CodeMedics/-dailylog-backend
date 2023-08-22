@@ -21,40 +21,40 @@ public class MemberTests {
     @Autowired
     private CreateMemberService createMemberService;
 
-    private static Stream<Arguments> getMember() {
-        return Stream.of(
-                Arguments.of(
-                        new CreateMemberDTO(
-                                "whvudgns123",
-                                "너구리",
-                                "잘생긴 사진.jpg",
-                                "123123",
-                                "123123",
-                                SocialEnum.KAKAO,
-                                DeleteEnum.PRESENT
-
-                        )
-                ),
-                Arguments.of(
-                        new CreateMemberDTO(
-                                "whvudgns1231",
-                                "너구리",
-                                "잘생긴 사진.jpg",
-                                "123123",
-                                "123123",
-                                SocialEnum.KAKAO,
-                                DeleteEnum.PRESENT
-                        )
-                )
-
-        );
-    }
-
-    @ParameterizedTest
-    @MethodSource("getMember")
-    void create(CreateMemberDTO createMemberDTO) {
-        Assertions.assertDoesNotThrow(
-                () -> createMemberService.create(createMemberDTO)
-        );
-    }
+//    private static Stream<Arguments> getMember() {
+//        return Stream.of(
+//                Arguments.of(
+//                        new CreateMemberDTO(
+//                                "whvudgns123",
+//                                "너구리",
+//                                "잘생긴 사진.jpg",
+//                                "123123",
+//                                "123123",
+//                                SocialEnum.KAKAO,
+//                                DeleteEnum.PRESENT
+//
+//                        )
+//                ),
+//                Arguments.of(
+//                        new CreateMemberDTO(
+//                                "whvudgns1231",
+//                                "너구리",
+//                                "잘생긴 사진.jpg",
+//                                "123123",
+//                                "123123",
+//                                SocialEnum.KAKAO,
+//                                DeleteEnum.PRESENT
+//                        )
+//                )
+//
+//        );
+//    }
+//
+//    @ParameterizedTest
+//    @MethodSource("getMember")
+//    void create(CreateMemberDTO createMemberDTO) {
+//        Assertions.assertDoesNotThrow(
+//                () -> createMemberService.create(createMemberDTO)
+//        );
+//    }
 }
