@@ -5,11 +5,10 @@ import com.ohgiraffers.dailylogbackend.feed.command.domain.aggregate.entity.Feed
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
-import java.util.Optional;
 
 @Mapper
-public interface GetFeedMapper {
+public interface FeedMapper {
 
-    List<DiaryEntity> getFeedList();
+    List<FeedEntity> getFeedList();
 
 }

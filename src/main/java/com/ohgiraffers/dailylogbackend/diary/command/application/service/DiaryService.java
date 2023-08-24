@@ -5,6 +5,7 @@ import com.ohgiraffers.dailylogbackend.diary.command.application.dto.DiaryUpdate
 import com.ohgiraffers.dailylogbackend.diary.command.application.dto.DiaryWriteDTO;
 import com.ohgiraffers.dailylogbackend.diary.command.domain.aggregate.entity.DiaryEntity;
 import com.ohgiraffers.dailylogbackend.diary.command.infra.repository.DiaryRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +16,7 @@ public class DiaryService {
 
     private final DiaryRepository diaryRepository;
 
+    @Autowired
     public DiaryService(DiaryRepository diaryRepository) {
         this.diaryRepository = diaryRepository;
     }
@@ -24,7 +26,8 @@ public class DiaryService {
 
         DiaryEntity diaryEntity = new DiaryEntity(diaryWriteDTO.getMemberEntity(),
                 diaryWriteDTO.getDiaryContent(),
-                diaryWriteDTO.getFeelCategory());
+                diaryWriteDTO.getFeelCategory(),
+                diaryWriteDTO.getDiaryDate());
 
         return diaryRepository.save(diaryEntity);
     }
