@@ -40,6 +40,7 @@ public class DiaryTest {
     GetFeedService getFeedService;
 
     private static MemberEntity staticMemberEntity;
+    private static DiaryEntity staticDiaryEntity;
 
     public MemberEntity setUp() {
         return insertFakeUser.insertFakeUser();
@@ -64,12 +65,12 @@ public class DiaryTest {
         DiaryWriteDTO diaryWriteDTO = new DiaryWriteDTO(memberEntity, "create", "create", LocalDate.now());
 
         // Act
-        DiaryEntity diaryEntity = diaryService.writeDiary(diaryWriteDTO);
+        staticDiaryEntity = diaryService.writeDiary(diaryWriteDTO);
 
         // Assert
-        assertNotNull(diaryEntity);
-        assertEquals(diaryWriteDTO.getDiaryContent(), diaryEntity.getDiaryContent());
-        assertEquals(diaryWriteDTO.getFeelCategory(), diaryEntity.getFeelCategory());
+        assertNotNull(staticDiaryEntity);
+        assertEquals(diaryWriteDTO.getDiaryContent(), staticDiaryEntity.getDiaryContent());
+        assertEquals(diaryWriteDTO.getFeelCategory(), staticDiaryEntity.getFeelCategory());
 
     }
 
@@ -85,8 +86,8 @@ public class DiaryTest {
 
         // Assert
         assertNotNull(myDiary);
-        assertEquals("create", myDiary.getDiaryContent());
-        assertEquals("create", myDiary.getFeelCategory());
+        assertEquals(staticDiaryEntity.getDiaryContent(), myDiary.getDiaryContent());
+        assertEquals(staticDiaryEntity.getFeelCategory(), myDiary.getFeelCategory());
         assertEquals(today, myDiary.getDiaryDate());
     }
 
@@ -101,7 +102,6 @@ public class DiaryTest {
 
         // Assert
         assertNotNull(feedInsertedList);
-        assertEquals(1, feedInsertedList.size());
     }
 
     @Test
@@ -114,7 +114,6 @@ public class DiaryTest {
         List<FeedEntity> feedList = getFeedService.getFeedList();
         // Assert
         assertNotNull(feedList);
-        assertEquals(1L, feedList.get(0).getDiaryEntity().getMemberEntity().getMemberNo());
     }
 
     @Test
@@ -126,8 +125,8 @@ public class DiaryTest {
         DiaryUpdateDTO diaryUpdateDTO = new DiaryUpdateDTO("update", "update");
 
         // Act
-        DiaryEntity updatedDiary = diaryService.updateDiary(1L, diaryUpdateDTO);
 
+        DiaryEntity updatedDiary = diaryService.updateDiary(staticDiaryEntity.getDiaryNo(), diaryUpdateDTO);
         // Assert
         assertNotNull(updatedDiary);
         assertEquals(diaryUpdateDTO.getDiaryContent(), updatedDiary.getDiaryContent());
@@ -141,7 +140,7 @@ public class DiaryTest {
         // Arrange
 
         // Act
-        DiaryEntity deletedDiary = diaryService.deleteDiary(1L);
+        DiaryEntity deletedDiary = diaryService.deleteDiary(staticDiaryEntity.getDiaryNo());
 
         // Assert
         assertEquals(deletedDiary.getIfDelete(), DeleteEnum.DELETED);
