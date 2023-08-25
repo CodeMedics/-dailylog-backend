@@ -1,16 +1,6 @@
-
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-# This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-gradle
-
 name: Java CI with Gradle
 
 on:
-  push:
-    branches: [ "develop" ]
   pull_request:
     branches: [ "develop" ]
 
@@ -18,7 +8,6 @@ permissions: write-all
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -32,16 +21,10 @@ jobs:
       - name: Setup MySQL
         uses: samin/mysql-action@v1
         with:
-          character set server: 'utf8'
-#          mysql database: ${{ secrets.DATABASE_NAME }}
-#          mysql user: ${{ secrets.MYSQL_USERNAME }}
-#          mysql password: ${{ secrets.MYSQL_PASSWORD }}
-          mysql database: harulog
-          mysql user: harulog
-          mysql password: harulog
-
-      - name: Add permission to mysql user
-        run: sudo mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'harulog'@'localhost' IDENTIFIED BY 'harulog';"
+          #character set server: 'utf8'
+          mysql database: ${{ secrets.DATABASE_NAME}}
+          mysql user: ${{ secrets.MYSQL_USERNAME }}
+          mysql password: ${{ secrets.MYSQL_PASSWORD }}
 
       - name: Add permission
         run: chmod +x gradlew
@@ -49,23 +32,14 @@ jobs:
       - name: Test with Gradle
         run: ./gradlew --info test
 
-      - name: Publish Unit Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v1
-        if: ${{ always() }}  # 테스트가 실패하여도 Report를 보기 위해 `always`로 설정
-        with:
-          files: build/test-results/**/*.xml
-
       - name: Build with Gradle
         uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
         with:
           arguments: build
 
-#      - name: Copy Secret
-#        env:
-#          OCCUPY_SECRET: ${{ secrets.OCCUPY_SECRET }}
-#          OCCUPY_SECRET_DIR: testImg
-#          OCCUPY_SECRET_TEST_DIR: src/test/java/com/ohgiraffers/dailylogbackend/file/FileServiceTests
-#          OCCUPY_SECRET_DIR_FILE_NAME: application.yml
-#        run: echo $OCCUPY_SECRET | base64 --decode > $OCCUPY_SECRET_DIR/$OCCUPY_SECRET_DIR_FILE_NAME &&
-#             echo $OCCUPY_SECRET | base64 --decode > $OCCUPY_SECRET_TEST_DIR/$OCCUPY_SECRET_DIR_FILE_NAME
-
+            
+      - name: Publish Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          junit_files: build/test-results/test/**/*.xml
