@@ -48,7 +48,6 @@ jobs:
         with:
           arguments: build
 
-    steps:
       - name: Copy Secret
         env:
           OCCUPY_SECRET: ${{ secrets.OCCUPY_SECRET }}
