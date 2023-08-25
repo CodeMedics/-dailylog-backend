@@ -33,10 +33,13 @@ jobs:
         uses: samin/mysql-action@v1
         with:
           character set server: 'utf8'
-          mysql database: ${{ secrets.DATABASE_NAME }}
-          mysql user: ${{ secrets.MYSQL_USERNAME }}
-          mysql password: ${{ secrets.MYSQL_PASSWORD }}
-          
+#          mysql database: ${{ secrets.DATABASE_NAME }}
+#          mysql user: ${{ secrets.MYSQL_USERNAME }}
+#          mysql password: ${{ secrets.MYSQL_PASSWORD }}
+          mysql database: harulog
+          mysql user: harulog
+          mysql password: harulog
+
       - name: Add permission
         run: chmod +x gradlew
 
@@ -48,12 +51,12 @@ jobs:
         with:
           arguments: build
 
-      - name: Copy Secret
-        env:
-          OCCUPY_SECRET: ${{ secrets.OCCUPY_SECRET }}
-          OCCUPY_SECRET_DIR: testImg
-          OCCUPY_SECRET_TEST_DIR: src/test/java/com/ohgiraffers/dailylogbackend/file/FileServiceTests
-          OCCUPY_SECRET_DIR_FILE_NAME: application.yml
-        run: echo $OCCUPY_SECRET | base64 --decode > $OCCUPY_SECRET_DIR/$OCCUPY_SECRET_DIR_FILE_NAME && 
-             echo $OCCUPY_SECRET | base64 --decode > $OCCUPY_SECRET_TEST_DIR/$OCCUPY_SECRET_DIR_FILE_NAME
+#      - name: Copy Secret
+#        env:
+#          OCCUPY_SECRET: ${{ secrets.OCCUPY_SECRET }}
+#          OCCUPY_SECRET_DIR: testImg
+#          OCCUPY_SECRET_TEST_DIR: src/test/java/com/ohgiraffers/dailylogbackend/file/FileServiceTests
+#          OCCUPY_SECRET_DIR_FILE_NAME: application.yml
+#        run: echo $OCCUPY_SECRET | base64 --decode > $OCCUPY_SECRET_DIR/$OCCUPY_SECRET_DIR_FILE_NAME &&
+#             echo $OCCUPY_SECRET | base64 --decode > $OCCUPY_SECRET_TEST_DIR/$OCCUPY_SECRET_DIR_FILE_NAME
 
