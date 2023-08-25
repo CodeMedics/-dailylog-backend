@@ -39,7 +39,7 @@ jobs:
           
       - name: Add permission
         run: chmod +x gradlew
-
+        
       - name: Test with Gradle
         run: ./gradlew --info test
 
@@ -48,7 +48,6 @@ jobs:
         with:
           arguments: build
 
-    steps:
       - name: Copy Secret
         env:
           OCCUPY_SECRET: ${{ secrets.OCCUPY_SECRET }}
