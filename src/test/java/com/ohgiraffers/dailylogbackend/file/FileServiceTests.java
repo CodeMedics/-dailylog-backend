@@ -24,7 +24,7 @@ public class FileServiceTests {
     }
 
     @Test
-    @DisplayName("파일 저장 성공!")
+    @DisplayName("파일 저장 성공")
     public void saveFile() throws Exception {
         // given
         String filePath = fileService.save(getMockUploadFile());
@@ -38,7 +38,7 @@ public class FileServiceTests {
     }
 
     @Test
-    @DisplayName("파일 삭제 성공!")
+    @DisplayName("파일 삭제 성공")
     public void deleteFile() throws Exception {
         // given
         String filePath = fileService.save(getMockUploadFile());
