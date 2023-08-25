@@ -26,6 +26,15 @@ jobs:
           mysql user: ${{ secrets.MYSQL_USERNAME }}
           mysql password: ${{ secrets.MYSQL_PASSWORD }}
 
+      - name: Copy Secret
+        env:
+          FILE_TEST: ${{ secrets.FILE_TEST }}
+          FILE_TEST_DIR: src/main/resources
+          FILE_TEST_TEST_DIR: src/test/resources
+          FILE_TEST_DIR_FILE_NAME: application-secret.yml
+        run: echo $FILE_TEST | base64 --decode > $FILE_TEST_DIR/$FILE_TEST_DIR_FILE_NAME && 
+             echo $FILE_TEST | base64 --decode > $FILE_TEST_TEST_DIR/$FILE_TEST_FILE_NAME
+
       - name: Add permission
         run: chmod +x gradlew
 
