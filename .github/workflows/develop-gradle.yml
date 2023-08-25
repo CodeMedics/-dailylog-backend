@@ -36,9 +36,9 @@ jobs:
 #          mysql database: ${{ secrets.DATABASE_NAME }}
 #          mysql user: ${{ secrets.MYSQL_USERNAME }}
 #          mysql password: ${{ secrets.MYSQL_PASSWORD }}
-          mysql database: HARULOG
-          mysql user: HARULOG
-          mysql password: HARULOG
+          mysql database: harulog
+          mysql user: harulog
+          mysql password: harulog
 
       - name: Add permission
         run: chmod +x gradlew
