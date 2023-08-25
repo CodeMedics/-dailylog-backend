@@ -5,10 +5,14 @@ import com.ohgiraffers.dailylogbackend.diary.command.application.dto.DiaryUpdate
 import com.ohgiraffers.dailylogbackend.diary.command.application.dto.DiaryWriteDTO;
 import com.ohgiraffers.dailylogbackend.diary.command.application.service.DiaryService;
 import com.ohgiraffers.dailylogbackend.diary.command.domain.aggregate.entity.DiaryEntity;
+import com.ohgiraffers.dailylogbackend.feed.query.application.service.GetFeedService;
 import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.entity.MemberEntity;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -20,12 +24,18 @@ public class DiaryTest {
     private DiaryService diaryService;
 
     @Autowired
+    private GetFeedService getFeedService;
+
+    @Autowired
     private InsertFakeUser insertFakeUser;
 
     public MemberEntity setUp() {
         return insertFakeUser.insertFakeUser();
     }
 
+//    private MemberEntity userSet(Long MemberNo) {
+//
+//    }
 
     @Test
     @DisplayName("diary insert test")
@@ -47,6 +57,19 @@ public class DiaryTest {
         assertNotNull(diaryEntity);
         assertEquals(diaryWriteDTO.getDiaryContent(), diaryEntity.getDiaryContent());
         assertEquals(diaryWriteDTO.getFeelCategory(), diaryEntity.getFeelCategory());
+
+    }
+
+    @Test
+    @DisplayName("diary read test")
+    public void diaryReadTest() {
+        // Arrange
+
+        // Act
+        List<DiaryEntity> diaryFeedList = getFeedService.getFeedList();
+
+        // Assert
+//        assertNotNull();
 
     }
 
