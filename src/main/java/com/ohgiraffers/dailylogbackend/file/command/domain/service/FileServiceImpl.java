@@ -31,7 +31,7 @@ public class FileServiceImpl implements FileService{
             multipartFile.transferTo(new File(filePath));
         }catch (IOException e){
 
-            throw new IllegalArgumentException("파일 저장 실패");
+            throw new IllegalArgumentException("파일 저장 실패!");
         }
 
         return filePath;
@@ -43,7 +43,7 @@ public class FileServiceImpl implements FileService{
 
         if(!file.exists()) return;
 
-        if(!file.delete()) throw new IllegalArgumentException("파일 삭제 실패");
+        if(!file.delete()) throw new IllegalArgumentException("파일 삭제 실패!");
 
     }
 }

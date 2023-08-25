@@ -49,5 +49,5 @@ spring:
 
   file:
     dir: /testImg
-    # 1. 상대경로로 수정
-    # 2. 깃허브 액션 환경 변수에 application.yml 파일 업로드
+    # 1. 상대경로로 수정.
+    # 2. 깃허브 액션 환경 변수에 application.yml 파일 업로드.
