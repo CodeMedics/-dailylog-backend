@@ -13,8 +13,8 @@
     <resultMap id="memberResultMap" autoMapping="true" type="MemberEntity"/>
     <select id="getFeedList" resultMap="feedResultMap">
         SELECT *
-        FROM HARULOG.FEED F
-        RIGHT OUTER JOIN HARULOG.DIARY D
+        FROM FEED F
+        RIGHT OUTER JOIN DIARY D
         ON F.DIARY_NO = D.DIARY_NO
     </select>
 </mapper>
