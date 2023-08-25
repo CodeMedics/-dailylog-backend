@@ -40,6 +40,9 @@ jobs:
           mysql user: harulog
           mysql password: harulog
 
+      - name: Add permission to mysql user
+        run: sudo mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'harulog'@'localhost' IDENTIFIED BY 'harulog';"
+
       - name: Add permission
         run: chmod +x gradlew
 
