@@ -7,12 +7,12 @@
 
     <select id="getMyDiary" resultType="DiaryEntity">
         SELECT *
-        FROM DIARY
+        FROM HARULOG.DIARY
         WHERE MEMBER_NO = #{memberNo} AND DIARY_DATE = #{diaryDate, jdbcType=DATE}
     </select>
     <select id="getFeedInputDiary" resultType="java.lang.Long">
         SELECT DIARY_NO
-        FROM DIARY
+        FROM HARULOG.DIARY
         ORDER BY RAND()
         LIMIT 5
     </select>
