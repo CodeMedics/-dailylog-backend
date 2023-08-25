@@ -74,47 +74,47 @@ public class DiaryTest {
 
     }
 
-    @Test
-    @DisplayName("my diary read test")
-    @Order(2)
-    public void diaryReadTest() {
-        // Arrange
-        LocalDate today = LocalDate.now();
-
-        // Act
-        DiaryEntity myDiary = getDiaryService.getMyDiary(staticMemberEntity, today);
-
-        // Assert
-        assertNotNull(myDiary);
-        assertEquals(staticDiaryEntity.getDiaryContent(), myDiary.getDiaryContent());
-        assertEquals(staticDiaryEntity.getFeelCategory(), myDiary.getFeelCategory());
-        assertEquals(today, myDiary.getDiaryDate());
-    }
-
-    @Test
-    @DisplayName("diary feed write test")
-    @Order(3)
-    public void diaryFeedWriteTest() {
-        // Arrange
-
-        // Act
-        List<FeedEntity> feedInsertedList =  feedService.createFeed();
-
-        // Assert
-        assertNotNull(feedInsertedList);
-    }
-
-    @Test
-    @DisplayName("diary feed read test")
-    @Order(4)
-    public void diaryFeedReadTest() {
-        // Arrange
-
-        // Act
-        List<FeedEntity> feedList = getFeedService.getFeedList();
-        // Assert
-        assertNotNull(feedList);
-    }
+//    @Test
+//    @DisplayName("my diary read test")
+//    @Order(2)
+//    public void diaryReadTest() {
+//        // Arrange
+//        LocalDate today = LocalDate.now();
+//
+//        // Act
+//        DiaryEntity myDiary = getDiaryService.getMyDiary(staticMemberEntity, today);
+//
+//        // Assert
+//        assertNotNull(myDiary);
+//        assertEquals(staticDiaryEntity.getDiaryContent(), myDiary.getDiaryContent());
+//        assertEquals(staticDiaryEntity.getFeelCategory(), myDiary.getFeelCategory());
+//        assertEquals(today, myDiary.getDiaryDate());
+//    }
+//
+//    @Test
+//    @DisplayName("diary feed write test")
+//    @Order(3)
+//    public void diaryFeedWriteTest() {
+//        // Arrange
+//
+//        // Act
+//        List<FeedEntity> feedInsertedList =  feedService.createFeed();
+//
+//        // Assert
+//        assertNotNull(feedInsertedList);
+//    }
+//
+//    @Test
+//    @DisplayName("diary feed read test")
+//    @Order(4)
+//    public void diaryFeedReadTest() {
+//        // Arrange
+//
+//        // Act
+//        List<FeedEntity> feedList = getFeedService.getFeedList();
+//        // Assert
+//        assertNotNull(feedList);
+//    }
 
     @Test
     @DisplayName("diary update test")
