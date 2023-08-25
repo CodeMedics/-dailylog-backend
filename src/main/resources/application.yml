@@ -47,8 +47,13 @@ spring:
 
   thymeleaf3.decoupled-logic: true
 
+
 # MyBatis 설정
 
 mybatis:
   config-location: classpath:config/mybatis-config.xml
   mapper-locations: classpath:mapper/**/*.xml
+
+file:
+  dir: /testImg
+
