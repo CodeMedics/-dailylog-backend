@@ -9,6 +9,12 @@ plugins {
 group = 'com.ohgiraffers'
 version = '0.0.1-SNAPSHOT'
 
+//configurations {
+//    compileOnly {
+//        extendsFrom annotationProcessor
+//    }
+//}
+
 java {
     sourceCompatibility = '11'
 }
