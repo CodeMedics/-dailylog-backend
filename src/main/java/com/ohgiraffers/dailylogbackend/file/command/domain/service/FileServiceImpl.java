@@ -17,7 +17,7 @@ public class FileServiceImpl implements FileService{
     private final String fileDir;
 
     @Autowired
-    public FileServiceImpl(FileRepository fileRepository, @Value("./testImg") String fileDir) {
+    public FileServiceImpl(FileRepository fileRepository, @Value("./src/testImg") String fileDir) {
         this.fileRepository = fileRepository;
         this.fileDir = fileDir;
     }
