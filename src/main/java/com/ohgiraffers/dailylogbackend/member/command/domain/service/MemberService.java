@@ -3,7 +3,6 @@ package com.ohgiraffers.dailylogbackend.member.command.domain.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ohgiraffers.dailylogbackend.member.command.application.dto.MemberDTO;
-import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.EnumType.SocialEnum;
 import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.entity.MemberEntity;
 import com.ohgiraffers.dailylogbackend.member.command.domain.repository.MemberRepository;
 import org.modelmapper.ModelMapper;
@@ -11,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
+
+import static com.ohgiraffers.dailylogbackend.common.enumType.DeleteEnum.PRESENT;
 
 @Service
 public class MemberService {
@@ -26,8 +27,8 @@ public class MemberService {
         this.objectMapper = objectMapper;
     }
 
-    public MemberDTO findByUID(SocialEnum social , String UID) {
-        MemberEntity foundMember = memberRepository.findByUID(UID, social);
+    public MemberDTO findByUID(String socialLogin , String UID) {
+        MemberEntity foundMember = memberRepository.findByUID(UID, socialLogin);
 
         if(foundMember == null) {
             return  null;
@@ -47,5 +48,13 @@ public class MemberService {
         MemberEntity authedMember = (MemberEntity) memberRepository.findByUID(memberNo);
 
         return modelMapper.map(authedMember, MemberDTO.class);
+    }
+
+    public Long registNewMember(MemberDTO newMember) {
+
+        newMember.setNickname("신규회원" + (Math.random() * 100) +1);
+        newMember.setIsDeleted(PRESENT);
+
+        return memberRepository.save(modelMapper.map(newMember, MemberEntity.class)).getMemberNo();
     }
 }

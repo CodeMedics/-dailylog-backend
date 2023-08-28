@@ -10,6 +10,7 @@ import com.ohgiraffers.dailylogbackend.login.dto.RenewTokenDTO;
 import com.ohgiraffers.dailylogbackend.login.repository.LoginRepository;
 import com.ohgiraffers.dailylogbackend.member.command.application.dto.MemberDTO;
 import com.ohgiraffers.dailylogbackend.member.command.application.service.CreateMemberService;
+import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.EnumType.SocialEnum;
 import com.ohgiraffers.dailylogbackend.member.command.domain.service.MemberService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
+
+import java.time.LocalDate;
+
+import static com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.EnumType.SocialEnum.KAKAO;
 
 @Service
 public class LoginService {
@@ -141,4 +146,35 @@ public class LoginService {
         return renewToken;
     }
 
+    public AccessTokenDTO getJwtToken(OauthTokenDTO oauthToken) {
+
+        KakaoProfileDTO kakaoProfileDTO = findKakaoProfile(oauthToken.getAccess_token());
+
+        MemberDTO foundMember = new MemberDTO();
+
+        if(memberService.findByUID(KAKAO.name(), String.valueOf(kakaoProfileDTO.getUID())) == null) {
+            MemberDTO newMember = new MemberDTO();
+
+            newMember.setSocialLogin(KAKAO);
+            newMember.setUID(String.valueOf(kakaoProfileDTO.getUID()));
+            newMember.setEmail(kakaoProfileDTO.getKakao_account().getEmail());
+            newMember.setRefreshToken(oauthToken.getRefresh_token());
+            newMember.setAccessToken(oauthToken.getAccess_token());
+            newMember.setSignUpDate(LocalDate.now());
+            newMember.setRefreshTokenExpireDate(oauthToken.getRefresh_token_expires_in() + System.currentTimeMillis());
+            newMember.setAccessTokenExpireDate(oauthToken.getExpires_in() + System.currentTimeMillis());
+            newMember.setProfileImage("https://api.dicebear.com/6.x/thumbs/svg?seed=" + newMember.getEmail().split("@")[0]);
+
+            memberService.registNewMember(newMember);
+        }
+
+        foundMember = memberService.findByUID(KAKAO.name(), String.valueOf(kakaoProfileDTO.getUID()));
+
+        foundMember.setRefreshToken(oauthToken.getRefresh_token());
+        foundMember.setAccessToken(oauthToken.getAccess_token());
+        foundMember.setRefreshTokenExpireDate(oauthToken.getRefresh_token_expires_in() + System.currentTimeMillis());
+        foundMember.setAccessTokenExpireDate(oauthToken.getExpires_in() + System.currentTimeMillis());
+
+        return tokenProvider.generateMemberToken(foundMember);
+    }
 }

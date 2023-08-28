@@ -19,7 +19,7 @@ public class MemberDTO {
     private String nickname;
     private String profileImage;
     private GenderEnum gender;
-    private SocialEnum social;
+    private SocialEnum socialLogin;
     private String email;
     private String accessToken;
     private long accessTokenExpireDate;

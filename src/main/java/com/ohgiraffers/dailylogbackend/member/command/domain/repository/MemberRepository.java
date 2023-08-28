@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface MemberRepository extends JpaRepository<MemberEntity, Long> {
-    MemberEntity findByUID(String uid, SocialEnum social);
+    MemberEntity findByUID(String uid, String socialLogin);
 
     List<Object> findByUID(Long memberNo);
 }

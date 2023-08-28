@@ -1,7 +1,9 @@
 package com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.entity;
 
+import com.ohgiraffers.dailylogbackend.common.AuditingFields;
 import com.ohgiraffers.dailylogbackend.common.enumType.DeleteEnum;
 import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.EnumType.GenderEnum;
+import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.EnumType.Role;
 import com.ohgiraffers.dailylogbackend.member.command.domain.aggregate.EnumType.SocialEnum;
 import lombok.*;
 
@@ -10,7 +12,6 @@ import java.time.LocalDate;
 
 @Entity(name = "Member")
 @Getter
-@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "member")
 @SequenceGenerator(
@@ -39,26 +40,17 @@ public class MemberEntity {
     private String profileImage;
 
     @Enumerated(EnumType.STRING)
+    private Role role;
+
+    @Enumerated(EnumType.STRING)
     private GenderEnum gender;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private SocialEnum social;
+    private SocialEnum socialLogin;
 
     @Column(nullable = false, name = "email")
     private String email;
-
-    @Column(name = "access_token", nullable = false)
-    private String accessToken;
-
-    @Column(name = "access_token_expire_date", nullable = false)
-    private long accessTokenExpireDate;
-
-    @Column(name = "refresh_token", nullable = false)
-    private String refreshToken;
-
-    @Column(name = "refresh_token_expire_date", nullable = false)
-    private long refreshTokenExpireDate;
 
     @Column(name = "sign_up_date", nullable = false)
     private LocalDate signUpDate;
@@ -80,18 +72,15 @@ public class MemberEntity {
     }
 
     @Builder
-    public MemberEntity(Long memberNo, String UID, String nickname, String profileImage, GenderEnum gender, SocialEnum social, String email, String accessToken, long accessTokenExpireDate, String refreshToken, long refreshTokenExpireDate) {
+    public MemberEntity(Long memberNo, String UID, String nickname, String profileImage, GenderEnum gender, SocialEnum socialLogin, String email, Role role) {
         this.memberNo = memberNo;
         this.UID = UID;
         this.nickname = nickname;
         this.profileImage = profileImage;
         this.gender = gender;
-        this.social = social;
+        this.socialLogin = socialLogin;
         this.email = email;
-        this.accessToken = accessToken;
-        this.accessTokenExpireDate = accessTokenExpireDate;
-        this.refreshToken = refreshToken;
-        this.refreshTokenExpireDate = refreshTokenExpireDate;
+        this.role = role;
     }
 
     public void setDeleteIf() {
@@ -100,6 +89,6 @@ public class MemberEntity {
         this.deletedDate = LocalDate.now();
     }
 
-    public MemberEntity(String uid, String nickname, String profileImage, String accessToken, String refreshToken, SocialEnum social, DeleteEnum isDeleted) {
+    public MemberEntity(String uid, String nickname, String profileImage, SocialEnum socialLogin, DeleteEnum isDeleted) {
     }
 }

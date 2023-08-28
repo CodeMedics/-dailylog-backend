@@ -24,7 +24,7 @@ public class CreateMemberService {
                 createMemberDTO.getProfileImage(),
                 createMemberDTO.getAccessToken(),
                 createMemberDTO.getRefreshToken(),
-                createMemberDTO.getSocial(),
+                createMemberDTO.getSocialLogin(),
                 createMemberDTO.getIsDeleted()
         );
 

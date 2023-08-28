@@ -64,8 +64,8 @@ public class SecurityConfig {
                 // 추후 예외처리 해야 하는 부분을 추가한다.
                 .and()
                 .exceptionHandling()
-                .authenticationEntryPoint((AuthenticationEntryPoint) jwtAuthenticationEntryPoint)
-                .accessDeniedHandler((AccessDeniedHandler) jwtAccessDeniedHandler)
+                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                .accessDeniedHandler(jwtAccessDeniedHandler)
                 // 시큐리티는 기본적으로 세션을 사용하지만 API서버 에서는 세션을 사용하지 않기 때문에 세션 설정을 Stateless 로 설정
                 .and()
                 .sessionManagement()
