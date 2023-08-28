@@ -9,13 +9,10 @@ import java.util.UUID;
 
 @EnableJpaAuditing
 @SpringBootApplication
-@PropertySource("classpath:application.yml")
 public class Application {
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
-
-        String uuid = UUID.randomUUID().toString();
     }
 
 }
