@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CommentRepository extends JpaRepository<CommentEntity, Long> {
+
+    CommentEntity findByCommentDiaryVO_DiaryNo(Long diaryNo);
 }
+
