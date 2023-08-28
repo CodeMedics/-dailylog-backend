@@ -15,12 +15,8 @@ public class CommentMemberVO {
     @Column(name = "member_no")
     private Long memberNo;
 
-    @Column(name = "nickname")
-    private String nickname;
-
-    public CommentMemberVO(Long memberNo, String nickname) {
+    public CommentMemberVO(Long memberNo) {
         this.memberNo = memberNo;
-        this.nickname = nickname;
     }
 
     public CommentMemberVO() {
