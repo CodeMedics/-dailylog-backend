@@ -40,8 +40,7 @@ public class DiaryEntity extends AuditingFields {
     @Column
     private DeleteEnum ifDelete;
 
-    @OneToMany
-    @JoinColumn(name="comment_no")
+    @OneToMany(mappedBy = "diaryNo")
     private List<CommentEntity> comments;
 
     @PrePersist
