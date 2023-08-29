@@ -1,10 +1,10 @@
 package com.ohgiraffers.dailylogbackend.comment.command.domain.aggregate.vo;
 
+import com.ohgiraffers.dailylogbackend.diary.command.domain.aggregate.entity.DiaryEntity;
 import lombok.Getter;
 import lombok.ToString;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import javax.persistence.*;
 
 
 @Embeddable
@@ -12,10 +12,11 @@ import javax.persistence.Embeddable;
 @ToString
 public class CommentDiaryVO {
 
-    @Column(name = "diary_no")
-    private Long diaryNo;
+    @ManyToOne
+    @JoinColumn
+    private DiaryEntity diaryNo;
 
-    public CommentDiaryVO(Long diaryNo) {
+    public CommentDiaryVO(DiaryEntity diaryNo) {
         this.diaryNo = diaryNo;
     }
 

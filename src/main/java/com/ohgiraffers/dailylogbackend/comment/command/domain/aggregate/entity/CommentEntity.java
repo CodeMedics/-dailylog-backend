@@ -30,18 +30,21 @@ public class CommentEntity extends AuditingFields {
     @Enumerated(EnumType.STRING)
     private DeleteEnum commentIsDeleted;
 
-    @Embedded
-    private CommentDiaryVO commentDiaryVO;
+
+    @ManyToOne
+    @JoinColumn(name = "diary_no")
+    private DiaryEntity diaryNo;
+
 
     @Embedded
     private CommentMemberVO commentMemberVO;
 
 
-    public CommentEntity(Long commentNo, String commentContent, DeleteEnum commentIsDeleted, CommentDiaryVO commentDiaryVO, CommentMemberVO commentMemberVO) {
+    public CommentEntity(Long commentNo, String commentContent, DeleteEnum commentIsDeleted, DiaryEntity commentDiaryVO, CommentMemberVO commentMemberVO) {
         this.commentNo = commentNo;
         this.commentContent = commentContent;
         this.commentIsDeleted = commentIsDeleted;
-        this.commentDiaryVO = commentDiaryVO;
+        this.diaryNo = commentDiaryVO;
         this.commentMemberVO = commentMemberVO;
     }
 
