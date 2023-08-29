@@ -17,7 +17,6 @@ public class CommentSaveDTO {
 
     private Long memberNo;
 
-    private String nickname;
 
 
     public CommentSaveDTO() {
@@ -25,7 +24,6 @@ public class CommentSaveDTO {
         this.commentContent = commentContent;
         this.diaryNo = diaryNo;
         this.memberNo = memberNo;
-        this.nickname = nickname;
     }
 
     public CommentSaveDTO(Long commentNo, String commentContent, Long diaryNo, Long memberNo, String nickname) {
@@ -33,7 +31,6 @@ public class CommentSaveDTO {
         this.commentContent = commentContent;
         this.diaryNo = diaryNo;
         this.memberNo = memberNo;
-        this.nickname = nickname;
     }
 }
 
