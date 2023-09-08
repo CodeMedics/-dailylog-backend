@@ -2,11 +2,19 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ohgiraffers.dailylogbackend.feed.query.infra.mapper.GetFeedMapper">
-    <select id="getFeedList" resultType="List">
+<mapper namespace="com.ohgiraffers.dailylogbackend.feed.query.infra.mapper.FeedMapper">
+    <resultMap id="feedResultMap" type="FeedEntity">
+        <id property="feedNo" column="FEED_NO"/>
+        <association property="diaryEntity" resultMap="diaryResultMap"/>
+    </resultMap>
+    <resultMap id="diaryResultMap" autoMapping="true" type="DiaryEntity">
+        <association property="memberEntity" resultMap="memberResultMap"/>
+    </resultMap>
+    <resultMap id="memberResultMap" autoMapping="true" type="MemberEntity"/>
+    <select id="getFeedList" resultMap="feedResultMap">
         SELECT *
-        FROM FEED F
-        RIGHT 0UTER JOIN DIARY D
-        ON F.DIARY_ID = D.DIARY_ID
+        FROM HARULOG.FEED F
+        RIGHT OUTER JOIN HARULOG.DIARY D
+        ON F.DIARY_NO = D.DIARY_NO
     </select>
 </mapper>
