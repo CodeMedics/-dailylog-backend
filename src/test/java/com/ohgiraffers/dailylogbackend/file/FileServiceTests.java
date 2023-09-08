@@ -1,11 +1,9 @@
 //package com.ohgiraffers.dailylogbackend.file;
 //
 //import com.ohgiraffers.dailylogbackend.file.command.domain.service.FileService;
-//import net.bytebuddy.asm.Advice;
+//import org.junit.jupiter.api.DisplayName;
 //import org.junit.jupiter.api.Test;
-//import org.junit.jupiter.params.provider.Arguments;
 //import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.context.properties.EnableConfigurationProperties;
 //import org.springframework.boot.test.context.SpringBootTest;
 //import org.springframework.mock.web.MockMultipartFile;
 //
@@ -16,16 +14,17 @@
 //import static org.assertj.core.api.Assertions.*;
 //
 //@SpringBootTest
-//public class FileUploadTests {
+//public class FileServiceTests {
 //
 //    @Autowired
 //    private FileService fileService;
 //
 //    private MockMultipartFile getMockUploadFile() throws IOException {
-//        return new MockMultipartFile("file", "file.jpg", "image/jpg", new FileInputStream("C:/Users/user/Desktop/kim.jpg"));
+//        return new MockMultipartFile("file", "file.jpg", "image/jpg", new FileInputStream("./src/testImg/harulog.jpg"));
 //    }
 //
 //    @Test
+//    @DisplayName("파일 저장 성공")
 //    public void saveFile() throws Exception {
 //        // given
 //        String filePath = fileService.save(getMockUploadFile());
@@ -39,6 +38,7 @@
 //    }
 //
 //    @Test
+//    @DisplayName("파일 삭제 성공")
 //    public void deleteFile() throws Exception {
 //        // given
 //        String filePath = fileService.save(getMockUploadFile());

@@ -1,11 +1,11 @@
-package com.ohgiraffers.dailylogbackend.like.command.infra.service;
-
-
-import org.springframework.stereotype.Service;
-
-@Service
-public class LikesService {
-
+//package com.ohgiraffers.dailylogbackend.like.command.infra.service;
+//
+//
+//import org.springframework.stereotype.Service;
+//
+//@Service
+//public class LikesService {
+//
 //    private final LikesRepository likesRepository;
 //    private final DiaryRepository diaryRepository;
 //    private final UserRepository userRepository;
@@ -43,4 +43,4 @@ public class LikesService {
 //        }
 //        diaryRepository.save(diary);
 //    }
-}
+//}
